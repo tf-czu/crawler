@@ -1,0 +1,397 @@
+Microsoft Windows [Version 10.0.26200.8246]
+(c) Microsoft Corporation. Všechna práva vyhrazena.
+
+C:\Users\work>ssh robot@192.168.1.109
+The authenticity of host '192.168.1.109 (192.168.1.109)' can't be established.
+ED25519 key fingerprint is SHA256:1siI79hGK+m4gM9+jotTGEkqAI+ToDqb43fxcjdvFGQ.
+This key is not known by any other names.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '192.168.1.109' (ED25519) to the list of known hosts.
+robot@192.168.1.109's password:
+Welcome to Ubuntu 26.04 LTS (GNU/Linux 7.0.0-15-generic x86_64)
+
+ * Documentation:  https://docs.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+ System information as of Mon May 11 12:16:20 PM UTC 2026
+
+  System load:    0.04               Temperature:             56.9 C
+  Usage of /home: 0.0% of 816.35GB   Processes:               189
+  Memory usage:   2%                 Users logged in:         0
+  Swap usage:     0%                 IPv4 address for enp2s0: 192.168.1.109
+
+
+Expanded Security Maintenance for Applications is not enabled.
+
+1 update can be applied immediately.
+To see these additional updates run: apt list --upgradable
+
+Enable ESM Apps to receive additional future security updates.
+See https://ubuntu.com/esm or run: sudo pro status
+
+
+robot@robot:~$ sudo apt update
+[sudo: authenticate] Password:
+Hit:1 http://security.ubuntu.com/ubuntu resolute-security InRelease
+Hit:2 http://archive.ubuntu.com/ubuntu resolute InRelease
+Hit:3 http://archive.ubuntu.com/ubuntu resolute-updates InRelease
+Hit:4 http://archive.ubuntu.com/ubuntu resolute-backports InRelease
+1 package can be upgraded. Run 'apt list --upgradable' to see it.
+robot@robot:~$ sudo apt upgrade
+The following packages were automatically installed and are no longer required:
+  linux-headers-7.0.0-14          linux-image-unsigned-7.0.0-14-generic    linux-modules-7.0.0-14-generic  linux-tools-7.0.0-14-generic
+  linux-headers-7.0.0-14-generic  linux-main-modules-zfs-7.0.0-14-generic  linux-tools-7.0.0-14
+Use 'sudo apt autoremove' to remove them.
+
+Upgrading:
+  distro-info-data
+
+Summary:
+  Upgrading: 1, Installing: 0, Removing: 0, Not Upgrading: 0
+  Download size: 5,854 B
+  Space needed: 0 B / 91.8 GB available
+
+Continue? [Y/n] Y
+Get:1 http://archive.ubuntu.com/ubuntu resolute-updates/main amd64 distro-info-data all 0.68ubuntu0.1 [5,854 B]
+Fetched 5,854 B in 0s (54.7 kB/s)
+(Reading database… 139636 files and directories currently installed.)
+Preparing to unpack …/distro-info-data_0.68ubuntu0.1_all.deb…
+Unpacking distro-info-data (0.68ubuntu0.1) over (0.68build1)…
+Setting up distro-info-data (0.68ubuntu0.1)…
+Scanning processes...
+Scanning processor microcode...
+Scanning linux images...
+
+Running kernel seems to be up-to-date.
+
+The processor microcode seems to be up-to-date.
+
+No services need to be restarted.
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+robot@robot:~$ sudo apt install -y htop screen mc vim git curl
+htop is already the newest version (3.4.1-5build2).
+htop set to manually installed.
+screen is already the newest version (4.9.1-3ubuntu2).
+screen set to manually installed.
+vim is already the newest version (2:9.1.2141-1ubuntu4.1).
+vim set to manually installed.
+git is already the newest version (1:2.53.0-1ubuntu1).
+git set to manually installed.
+curl is already the newest version (8.18.0-1ubuntu2.1).
+curl set to manually installed.
+The following packages were automatically installed and are no longer required:
+  linux-headers-7.0.0-14          linux-image-unsigned-7.0.0-14-generic    linux-modules-7.0.0-14-generic  linux-tools-7.0.0-14-generic
+  linux-headers-7.0.0-14-generic  linux-main-modules-zfs-7.0.0-14-generic  linux-tools-7.0.0-14
+Use 'sudo apt autoremove' to remove them.
+
+Installing:
+  mc
+
+Installing dependencies:
+  bzip2  mailcap  mc-data  unzip
+
+Suggested packages:
+  bzip2-doc   catdoc            | lziprecover  default-jdk-headless  exif         gv             libbatik-java  | w3m    odt2txt     poppler-utils       sox              unar          xpdf
+  antiword    texlive-binaries  | minilzip     djview4               genisoimage  imagemagick    libchm-bin     | lynx   | unoconv   procyon-decompiler  sqlite3          unrar         | pdf-viewer
+  arc         clzip             | pdlzip       djvulibre-bin         gettext      jlha-utils     liblz4-tool    lyx      p7zip-full  python3-boto        timidity         | unrar-free  xpmutils
+  | arcanist  | lunzip          | plzip        elinks                ghostscript  | lhasa        libxml2-utils  mikmod   par2        python3-tz          unace            vorbis-tools  zip
+  arj         | lzd             ctorrent       epub-utils            glade        kchmviewer     links2         mpg321   poedit      rar                 | unace-nonfree  wimtools
+  cabextract  | lzip            dbview         | ncbi-entrez-direct  gputils      libaspell-dev  links          mplayer  | potool    rpm                 unalz            wv
+
+Summary:
+  Upgrading: 0, Installing: 5, Removing: 0, Not Upgrading: 0
+  Download size: 2,200 kB
+  Space needed: 8,712 kB / 91.8 GB available
+
+Get:1 http://archive.ubuntu.com/ubuntu resolute/main amd64 bzip2 amd64 1.0.8-6build2 [34.3 kB]
+Get:2 http://archive.ubuntu.com/ubuntu resolute/main amd64 mailcap all 3.75ubuntu1 [24.7 kB]
+Get:3 http://archive.ubuntu.com/ubuntu resolute/universe amd64 mc-data all 3:4.8.33-1.1build1 [1,383 kB]
+Get:4 http://archive.ubuntu.com/ubuntu resolute/universe amd64 mc amd64 3:4.8.33-1.1build1 [578 kB]
+Get:5 http://archive.ubuntu.com/ubuntu resolute/main amd64 unzip amd64 6.0-29ubuntu1 [180 kB]
+Fetched 2,200 kB in 1s (2,449 kB/s)
+Selecting previously unselected package bzip2.
+(Reading database… 139636 files and directories currently installed.)
+Preparing to unpack …/bzip2_1.0.8-6build2_amd64.deb…
+Unpacking bzip2 (1.0.8-6build2)…
+Selecting previously unselected package mailcap.
+Preparing to unpack …/mailcap_3.75ubuntu1_all.deb…
+Unpacking mailcap (3.75ubuntu1)…
+Selecting previously unselected package mc-data.
+Preparing to unpack …/mc-data_3%3a4.8.33-1.1build1_all.deb…
+Unpacking mc-data (3:4.8.33-1.1build1)…
+Selecting previously unselected package mc.
+Preparing to unpack …/mc_3%3a4.8.33-1.1build1_amd64.deb…
+Unpacking mc (3:4.8.33-1.1build1)…
+Selecting previously unselected package unzip.
+Preparing to unpack …/unzip_6.0-29ubuntu1_amd64.deb…
+Unpacking unzip (6.0-29ubuntu1)…
+Setting up unzip (6.0-29ubuntu1)…
+Setting up bzip2 (1.0.8-6build2)…
+Setting up mc-data (3:4.8.33-1.1build1)…
+Setting up mailcap (3.75ubuntu1)…
+Setting up mc (3:4.8.33-1.1build1)…
+Processing triggers for man-db (2.13.1-1build1)…
+Scanning processes...
+Scanning processor microcode...
+Scanning linux images...
+
+Running kernel seems to be up-to-date.
+
+The processor microcode seems to be up-to-date.
+
+No services need to be restarted.
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+robot@robot:~$ nano
+robot@robot:~$ curl -LsSf https://astral.sh/uv/install.sh | sh
+downloading uv 0.11.13 x86_64-unknown-linux-gnu
+installing to /home/robot/.local/bin
+  uv
+  uvx
+everything's installed!
+
+To add $HOME/.local/bin to your PATH, either restart your shell or run:
+
+    source $HOME/.local/bin/env (sh, bash, zsh)
+    source $HOME/.local/bin/env.fish (fish)
+robot@robot:~$ ls /home
+lost+found  robot
+robot@robot:~$ # Vytvoření hlavních složek pro projekty a logy
+mkdir -p ~/git/bare
+mkdir -p ~/git/logs_osgar
+
+# Založení "bare" repozitářů (sem budete z notebooku posílat kód)
+cd ~/git/bare
+git init --bare osgar.git
+git init --bare crawler.git
+
+# Naklonování produkčních repozitářů (z těch robot reálně poběží)
+cd ~/git
+git clone ~/git/bare/osgar.git
+git clone ~/git/bare/crawler.git
+hint: Using 'master' as the name for the initial branch. This default branch name
+hint: will change to "main" in Git 3.0. To configure the initial branch name
+hint: to use in all of your new repositories, which will suppress this warning,
+hint: call:
+hint:
+hint:   git config --global init.defaultBranch <name>
+hint:
+hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+hint: 'development'. The just-created branch can be renamed via this command:
+hint:
+hint:   git branch -m <name>
+hint:
+hint: Disable this message with "git config set advice.defaultBranchName false"
+Initialized empty Git repository in /home/robot/git/bare/osgar.git/
+hint: Using 'master' as the name for the initial branch. This default branch name
+hint: will change to "main" in Git 3.0. To configure the initial branch name
+hint: to use in all of your new repositories, which will suppress this warning,
+hint: call:
+hint:
+hint:   git config --global init.defaultBranch <name>
+hint:
+hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+hint: 'development'. The just-created branch can be renamed via this command:
+hint:
+hint:   git branch -m <name>
+hint:
+hint: Disable this message with "git config set advice.defaultBranchName false"
+Initialized empty Git repository in /home/robot/git/bare/crawler.git/
+Cloning into 'osgar'...
+warning: You appear to have cloned an empty repository.
+done.
+Cloning into 'crawler'...
+warning: You appear to have cloned an empty repository.
+done.
+robot@robot:~/git$ # Aktivace uv pro aktuální sezení
+source $HOME/.local/bin/env
+
+# Zápis cest pro OSGAR a logy do .bashrc
+echo 'export PYTHONPATH="$PYTHONPATH:$HOME/git/osgar:$HOME/git/crawler"' >> ~/.bashrc
+echo 'export OSGAR_LOGS="$HOME/git/logs_osgar"' >> ~/.bashrc
+
+# Načtení .bashrc, aby se nové cesty aktivovaly
+source ~/.bashrc
+robot@robot:~/git$ cd ..
+robot@robot:~$ # Aktivace uv pro aktuální sezení
+source $HOME/.local/bin/env
+
+# Zápis cest pro OSGAR a logy do .bashrc
+echo 'export PYTHONPATH="$PYTHONPATH:$HOME/git/osgar:$HOME/git/crawler"' >> ~/.bashrc
+echo 'export OSGAR_LOGS="$HOME/git/logs_osgar"' >> ~/.bashrc
+
+# Načtení .bashrc, aby se nové cesty aktivovaly
+source ~/.bashrc
+robot@robot:~$ nano ~/.bashrc
+robot@robot:~$ uv --version
+uv 0.11.13 (x86_64-unknown-linux-gnu)
+robot@robot:~$ robot@robot:~$ uv --version
+uv 0.11.13 (x86_64-unknown-linux-gnu)
+robot@robot:~$cat /var/log/installer/autoinstall-user-data
+robot@robot:~$: command not found
+-bash: syntax error near unexpected token `('
+robot@robot:~: command not found
+robot@robot:~$ cat /var/log/installer/autoinstall-user-data
+cat: /var/log/installer/autoinstall-user-data: Permission denied
+robot@robot:~$ sudo cat /var/log/installer/autoinstall-user-data
+[sudo: authenticate] Password:
+#cloud-config
+# See the autoinstall documentation at:
+# https://canonical-subiquity.readthedocs-hosted.com/en/latest/reference/autoinstall-reference.html
+autoinstall:
+  apt:
+    disable_components: []
+    fallback: offline-install
+    geoip: true
+    mirror-selection:
+      primary:
+      - country-mirror
+      - arches:
+        - amd64
+        - arm64
+        - i386
+        uri: http://archive.ubuntu.com/ubuntu/
+      - arches:
+        - armhf
+        - powerpc
+        - ppc64el
+        - riscv64
+        - s390x
+        uri: http://ports.ubuntu.com/ubuntu-ports
+    preserve_sources_list: false
+    security:
+    - arches:
+      - amd64
+      - arm64
+      - i386
+      uri: http://security.ubuntu.com/ubuntu/
+    - arches:
+      - armhf
+      - powerpc
+      - ppc64el
+      - riscv64
+      - s390x
+      uri: http://ports.ubuntu.com/ubuntu-ports
+  codecs:
+    install: false
+  drivers:
+    install: false
+  identity:
+    hostname: robot
+    password: $6$KHskEjo.XXml..nv$NuSaOKaNkoIaTUzfOjNHShAf.IHinkCGsDEUpXCxKyLACpUXyQx0yIEOS92kVzOPMTJl3f5VXoXczjTbYPUoE0
+    realname: robot
+    username: robot
+  kernel:
+    package: linux-generic
+  keyboard:
+    layout: us
+    toggle: null
+    variant: ''
+  locale: en_US.UTF-8
+  network:
+    ethernets:
+      enp1s0:
+        match:
+          macaddress: 00:1e:06:45:c3:9e
+        set-name: enp1s0
+      enp2s0:
+        accept-ra: true
+        dhcp4: true
+        dhcp6: true
+    version: 2
+  oem:
+    install: auto
+  source:
+    id: ubuntu-server
+    search_drivers: false
+  ssh:
+    allow-pw: true
+    authorized-keys: []
+    install-server: true
+  storage:
+    config:
+    - transport: pcie
+      preserve: true
+      id: nvme-controller-nvme0
+      type: nvme_controller
+    - ptable: gpt
+      serial: Samsung_SSD_980_1TB_S78HNL0X932689Y_1
+      wwn: eui.002538d941a10b66
+      nvme_controller: nvme-controller-nvme0
+      path: /dev/nvme0n1
+      preserve: false
+      name: ''
+      grub_device: false
+      id: disk-nvme0n1
+      type: disk
+    - device: disk-nvme0n1
+      size: 1127219200
+      wipe: superblock
+      flag: boot
+      number: 1
+      preserve: false
+      grub_device: true
+      offset: 1048576
+      path: /dev/nvme0n1p1
+      id: partition-0
+      type: partition
+    - fstype: fat32
+      volume: partition-0
+      preserve: false
+      id: format-0
+      type: format
+    - device: disk-nvme0n1
+      size: 107374182400
+      wipe: superblock
+      number: 2
+      preserve: false
+      grub_device: false
+      offset: 1128267776
+      path: /dev/nvme0n1p2
+      id: partition-1
+      type: partition
+    - fstype: ext4
+      volume: partition-1
+      preserve: false
+      id: format-1
+      type: format
+    - path: /
+      device: format-1
+      id: mount-1
+      type: mount
+    - device: disk-nvme0n1
+      size: 891700641792
+      wipe: superblock
+      number: 3
+      preserve: false
+      grub_device: false
+      offset: 108502450176
+      path: /dev/nvme0n1p3
+      id: partition-2
+      type: partition
+    - fstype: ext4
+      volume: partition-2
+      preserve: false
+      id: format-2
+      type: format
+    - path: /home
+      device: format-2
+      id: mount-2
+      type: mount
+    - path: /boot/efi
+      device: format-0
+      id: mount-0
+      type: mount
+  updates: security
+  version: 1
+robot@robot:~$
