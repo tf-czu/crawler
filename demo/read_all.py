@@ -1,13 +1,13 @@
 import time
 from pymavlink import mavutil
 
-master = mavutil.mavlink_connection('/dev/ttyACM0', baud=921600)
+master = mavutil.mavlink_connection('/dev/serial/by-id/usb-CubePilot_CubeOrange+_32002C001951333230363332-if00', baud=921600)
 
 # Proměnné pro uložení posledního známého stavu
 posledni_rc = None
 posledni_esc = None
 bad_data_count = 0
-
+msg_count = 0
 print("Hlavní smyčka robota běží...")
 
 try:
@@ -15,7 +15,7 @@ try:
         # Přečteme zprávu, ale NEČEKÁME (blocking=False)
         # Vybereme libovolnou zprávu, proto nefiltrujeme přes 'type'
         msg = master.recv_match(blocking=True)
-        
+        msg_count += 1
         # Pokud nějaká zpráva právě teď přišla, roztřídíme ji
         if msg:
             typ = msg.get_type()
@@ -23,7 +23,7 @@ try:
             if typ == 'RC_CHANNELS':
                 posledni_rc = msg.chan1_raw
                 #print(msg)
-                print(f"Ch1: {msg.chan1_raw}, Ch2: {msg.chan2_raw}, Ch3: {msg.chan3_raw}")
+                print(f"Ch1: {msg.chan1_raw}, Ch2: {msg.chan2_raw}, Ch3: {msg.chan3_raw} No:{msg_count}")
                 # Můžeme hned reagovat na změnu páčky
             elif typ == 'SERVO_OUTPUT_RAW':
                 #print(msg)
@@ -49,6 +49,7 @@ try:
             elif typ == 'SCALED_IMU3':
                 pass #???
             elif typ == 'HEARTBEAT':
+                print(msg)
                 pass #???
             elif typ == 'SCALED_PRESSURE':
                 pass #???
@@ -86,6 +87,8 @@ try:
             elif typ == 'PARAM_VALUE':
                 pass #???
             elif typ == 'STATUSTEXT':
+                pass #???
+            elif typ == 'ADSB_VEHICLE':
                 pass #???
             else:
                 print(typ)
