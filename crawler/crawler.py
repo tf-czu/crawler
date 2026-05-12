@@ -12,7 +12,7 @@ class Crawler(Node):
 
     def __init__(self, config, bus):
         super().__init__(config, bus)
-        bus.register('pose2d')
+        bus.register('pose2d', 'msg')
         self.max_speed = config.get('max_speed', 0.1)
         self.pose = 0, 0, 0
         self.desired_speed = 0  # m/s
@@ -25,6 +25,9 @@ class Crawler(Node):
         self.desired_speed, self.desired_angular_speed = data[0]/1000, math.radians(data[1]/100)
 
     def on_tick(self, data):
+        msg = self.master.recv_match(blocking=True)
+        self.publish('msg', msg)
+
         # 1900 - max dopredu, 1100 - max dozadu
         levy_mix, pravy_mix = self.max_speed, self.max_speed
         pwm_levy = int(1500 + (levy_mix * 500))
