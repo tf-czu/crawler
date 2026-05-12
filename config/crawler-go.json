@@ -1,0 +1,36 @@
+{
+  "version": 2,
+  "robot": {
+    "modules": {
+      "app": {
+          "driver": "osgar.go:Go",
+          "in": ["emergency_stop", "pose2d"],
+          "out": ["desired_speed"],
+          "init": {
+            "max_speed": 0.2,
+            "dist": 1.0,
+            "timeout": 10
+          }
+      },
+      "platform": {
+        "driver": "crawler.crawler:Crawler",
+        "in": [],
+        "out": ["pose2d"],
+        "init": {}
+      },
+      "timer": {
+        "driver": "timer",
+        "in": [],
+        "out": ["tick"],
+        "init": {
+          "sleep": 0.1
+        }
+      }
+    },
+    "links": [
+      ["app.desired_speed", "platform.desired_speed"],
+      ["platform.pose2d", "app.pose2d"],
+      ["timer.tick", "platform.tick"]
+    ]
+  }
+}
