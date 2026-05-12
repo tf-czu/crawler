@@ -26,7 +26,7 @@ class Crawler(Node):
 
     def on_tick(self, data):
         msg = self.master.recv_match(blocking=True)
-        self.publish('msg', msg)
+        self.publish('msg', str(msg))
 
         # 1900 - max dopredu, 1100 - max dozadu
         levy_mix, pravy_mix = self.max_speed, self.max_speed
