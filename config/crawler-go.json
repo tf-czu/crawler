@@ -18,19 +18,28 @@
         "out": ["pose2d"],
         "init": {}
       },
+      "serial": {
+          "driver": "serial",
+          "in": ["raw"],
+          "out": ["raw"],
+          "init": {"port": "/dev/serial/by-id/usb-CubePilot_CubeOrange+_32002C001951333230363332-if00",
+            "speed": 115200}
+      },
       "timer": {
         "driver": "timer",
         "in": [],
         "out": ["tick"],
         "init": {
-          "sleep": 0.01
+          "sleep": 0.1
         }
       }
     },
     "links": [
       ["app.desired_speed", "platform.desired_speed"],
       ["platform.pose2d", "app.pose2d"],
-      ["timer.tick", "platform.tick"]
+      ["timer.tick", "platform.tick"],
+      ["platform.raw_serial", "serial.raw"],
+      ["serial.raw", "platform.raw_serial"]
     ]
   }
 }
