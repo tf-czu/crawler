@@ -52,7 +52,7 @@ class Crawler(Node):
 
     def on_raw_serial(self, data):
         for b in data:
-            msg = self.master.parse_char(b)
+            msg = self.master.parse_char(bytes([b]))
             if msg:
                 self.publish('msg', str(msg))
 
