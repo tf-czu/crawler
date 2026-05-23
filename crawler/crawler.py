@@ -10,9 +10,10 @@ from pymavlink.dialects.v20 import ardupilotmega as mavlink  # hmm
 from osgar.node import Node
 
 
-class Crawler(Node):
+RPM2MPS = 1.0  # scale RPM to distance traveled in maters
 
-    RPM2MPS = 1.0  # scale RPM to distance traveled in maters
+
+class Crawler(Node):
 
     def __init__(self, config, bus):
         super().__init__(config, bus)
@@ -31,7 +32,7 @@ class Crawler(Node):
 
     def publish_pose2d(self, dt, speed, angular_speed):
         x, y, heading = self.pose
-        dist = speed * dt
+        dist = speed * dt.total_seconds()
 
         # advance robot by given distance and angle
         if abs(angular_speed) < 0.0000001:  # EPS
@@ -52,8 +53,14 @@ class Crawler(Node):
 
     def on_raw_serial(self, data):
         for b in data:
-            msg = self.master.parse_char(bytes([b]))
+            try:
+                msg = self.master.parse_char(bytes([b]))
+            except mavlink.MAVError:
+                print(f'skipping {hex(b)}')
+                msg = None
             if msg:
+                if self.verbose:
+                    print(msg)
                 self.publish('msg', str(msg))
 
                 msg_type = msg.get_type()
