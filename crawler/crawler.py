@@ -29,6 +29,7 @@ class Crawler(Node):
 #        self.master.wait_heartbeat()
         self.master = mavlink.MAVLink(None)
         self.target_system, self.target_component = None, None
+        self.verbose = False   # TO BE REMOVED! (after osgar update)
 
     def publish_pose2d(self, dt, speed, angular_speed):
         x, y, heading = self.pose
@@ -94,5 +95,6 @@ class Crawler(Node):
         )
         #assert 0, msg.pack(self.master)
         #self.master.update_handlers(msg)
-        #print(self.desired_speed, msg.get_msgbuf())
+        print(self.desired_speed, pwm_levy, pwm_pravy)
         self.publish('raw_serial', msg.pack(self.master))
+        self.master.seq += 1
