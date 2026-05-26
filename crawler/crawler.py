@@ -92,3 +92,7 @@ class Crawler(Node):
             self.target_system, self.target_component,
             pwm_levy, pwm_pravy, 0, 0, 0, 0, 0, 0
         )
+        #assert 0, msg.pack(self.master)
+        #self.master.update_handlers(msg)
+        #print(self.desired_speed, msg.get_msgbuf())
+        self.publish('raw_serial', msg.pack(self.master))
