@@ -1,7 +1,8 @@
 import time
 from pymavlink import mavutil
 
-master = mavutil.mavlink_connection('/dev/serial/by-id/usb-CubePilot_CubeOrange+_32002C001951333230363332-if00', baud=921600)
+# master = mavutil.mavlink_connection('/dev/serial/by-id/usb-CubePilot_CubeOrange+_32002C001951333230363332-if00', baud=921600)
+master = mavutil.mavlink_connection('COM5', baud=921600)
 
 # Proměnné pro uložení posledního známého stavu
 posledni_rc = None
@@ -23,14 +24,16 @@ try:
             if typ == 'RC_CHANNELS':
                 posledni_rc = msg.chan1_raw
                 #print(msg)
-                print(f"Ch1: {msg.chan1_raw}, Ch2: {msg.chan2_raw}, Ch3: {msg.chan3_raw} No:{msg_count}")
+                print(f"Ch1: {msg.chan1_raw}, Ch2: {msg.chan2_raw}, Ch3: {msg.chan3_raw}, Ch4: {msg.chan4_raw} , Ch5: {msg.chan5_raw}, Ch6: {msg.chan6_raw}, Ch7: {msg.chan7_raw}, Ch8: {msg.chan8_raw}, Ch9: {msg.chan9_raw}, Ch10: {msg.chan10_raw} No:{msg_count}")
                 # Můžeme hned reagovat na změnu páčky
             elif typ == 'SERVO_OUTPUT_RAW':
                 #print(msg)
+                print(f"SERVO 1: {msg.servo1_raw} | SERVO 2: {msg.servo2_raw}")
                 pass
                 
             elif typ == 'ESC_TELEMETRY_1_TO_4':
                 posledni_esc = msg.rpm[0]
+                print(msg.rpm)
                 # Uložíme si otáčky
             elif typ == 'BAD_DATA':
                 bad_data_count += 1 
@@ -49,7 +52,7 @@ try:
             elif typ == 'SCALED_IMU3':
                 pass #???
             elif typ == 'HEARTBEAT':
-                print(msg)
+                #print(msg)
                 pass #???
             elif typ == 'SCALED_PRESSURE':
                 pass #???
