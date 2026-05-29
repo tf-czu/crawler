@@ -28,6 +28,8 @@ class Crawler(Node):
 #        self.master = mavutil.mavlink_connection('', baud=115200)
 #        self.master.wait_heartbeat()
         self.master = mavlink.MAVLink(None)
+        self.master.srcSystem = 255
+        self.master.srcComponent = 0
         self.target_system, self.target_component = None, None
         self.verbose = False   # TO BE REMOVED! (after osgar update)
 
@@ -79,22 +81,24 @@ class Crawler(Node):
         if self.target_system is None:
             return  # not identified yet
 
-        # 1900 - max dopredu, 1100 - max dozadu
-        # ignore angular speed at the moment
-        levy_mix, pravy_mix = self.desired_speed, self.desired_speed
-        pwm_levy = int(1500 + (levy_mix * 100))  # was 500
-        pwm_pravy = int(1500 + (pravy_mix * 100))
+        # 1900 - max dopredu, 1100 - max dozadu (for speed scaled by 500)
+        # Ch1 = Steering (zataceni), Ch2 = Throttle (plyn)
+        # Scale desired_speed (m/s) and desired_angular_speed (rad/s) to PWM.
+        # Scale factors: 1.0 m/s -> 500 PWM, 1.0 rad/s -> 500 PWM
+        pwm_steering = int(1500 + (self.desired_angular_speed * 500))
+        pwm_throttle = int(1500 + (self.desired_speed * 500))
 
-#        self.master.mav.rc_channels_override_send(
-#            self.master.target_system, self.master.target_component,
-#            pwm_levy, pwm_pravy, 0, 0, 0, 0, 0, 0
-#        )
+        # Clamp values to safe limits [1100, 1900]
+        pwm_steering = max(1100, min(1900, pwm_steering))
+        pwm_throttle = max(1100, min(1900, pwm_throttle))
+
+        # We must use 65535 for unused channels (no override) instead of 0,
+        # otherwise we might override critical channels (mode, safety, arming)
+        # to invalid/low values, triggering failsafes or disarming on ArduPilot.
         msg = self.master.rc_channels_override_encode(
             self.target_system, self.target_component,
-            pwm_levy, pwm_pravy, 0, 0, 0, 0, 0, 0
+            pwm_steering, pwm_throttle, 65535, 65535, 65535, 65535, 65535, 65535
         )
-        #assert 0, msg.pack(self.master)
-        #self.master.update_handlers(msg)
-        print(self.desired_speed, pwm_levy, pwm_pravy)
+        print(self.desired_speed, self.desired_angular_speed, pwm_steering, pwm_throttle)
         self.publish('raw_serial', msg.pack(self.master))
         self.master.seq += 1
