@@ -10,7 +10,7 @@ from pymavlink.dialects.v20 import ardupilotmega as mavlink  # hmm
 from osgar.node import Node
 
 
-RPM2MPS = 1.0  # scale RPM to distance traveled in maters
+RPM2MPS = 0.0001  # scale RPM to distance traveled in maters
 
 
 class Crawler(Node):
