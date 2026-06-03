@@ -25,6 +25,13 @@ class Crawler(Node):
         self.distance_traveled = 0.0  # meters
         self.last_distance_update_time = timedelta()
 
+        # Track distances for odometry estimation
+        self.last_dist_L = None
+        self.last_dist_R = None
+        self.delta_L = 0.0
+        self.delta_R = 0.0
+        self.wheel_track = config.get('wheel_track', 0.5)  # track width in meters
+
 #        self.master = mavutil.mavlink_connection('', baud=115200)
 #        self.master.wait_heartbeat()
         self.master = mavlink.MAVLink(None)
@@ -33,21 +40,22 @@ class Crawler(Node):
         self.target_system, self.target_component = None, None
         self.verbose = False   # TO BE REMOVED! (after osgar update)
 
-    def publish_pose2d(self, dt, speed, angular_speed):
+    def update_pose2d(self, dL, dR):
         x, y, heading = self.pose
-        dist = speed * dt.total_seconds()
+        dist = (dL + dR) / 2.0
+        d_heading = (dR - dL) / self.wheel_track
 
         # advance robot by given distance and angle
-        if abs(angular_speed) < 0.0000001:  # EPS
+        if abs(d_heading) < 0.000001:  # EPS
             # Straight movement - a special case
             x += dist * math.cos(heading)
             y += dist * math.sin(heading)
-            # Not needed: heading += angle
         else:
-            # Arc
-            x += dist * math.cos(heading)
-            y += dist * math.sin(heading)
-            heading += angular_speed * dt  # not normalized
+            # Arc approximation
+            x += dist * math.cos(heading + d_heading / 2.0)
+            y += dist * math.sin(heading + d_heading / 2.0)
+            heading += d_heading
+
         self.pose = (x, y, heading)
         self.publish('pose2d', [round(x*1000), round(y*1000), round(math.degrees(heading)*100)])
 
@@ -72,12 +80,31 @@ class Crawler(Node):
                     self.target_system = header.srcSystem
                     self.target_component = header.srcComponent
 
-                if msg_type == 'ESC_TELEMETRY_1_TO_4':
+                elif msg_type == 'NAMED_VALUE_FLOAT':
+                    if msg.name == 'Dist_L':
+                        if self.last_dist_L is not None:
+                            diff = msg.value - self.last_dist_L
+                            if abs(diff) < 10.0:  # protect against resets/glitches
+                                self.delta_L += diff
+                        self.last_dist_L = msg.value
+                    elif msg.name == 'Dist_R':
+                        if self.last_dist_R is not None:
+                            diff = msg.value - self.last_dist_R
+                            if abs(diff) < 10.0:  # protect against resets/glitches
+                                self.delta_R += diff
+                        self.last_dist_R = msg.value
+
+                elif msg_type == 'ESC_TELEMETRY_1_TO_4':
                     self.publish('rpm', [msg.rpm[0], msg.rpm[1]])
-                    self.distance_traveled += msg.rpm[0] * RPM2MPS
-                    self.publish_pose2d(self.time - self.last_distance_update_time, msg.rpm[0] * RPM2MPS, 0.0)
 
     def on_tick(self, data):
+        # Update pose based on accumulated deltas since the last tick
+        dL = self.delta_L
+        dR = self.delta_R
+        self.delta_L = 0.0
+        self.delta_R = 0.0
+        self.update_pose2d(dL, dR)
+
         if self.target_system is None:
             return  # not identified yet
 
