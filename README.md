@@ -21,7 +21,7 @@ Tento projekt obsahuje integrační, řídicí a komunikační software pro mobi
 
 ### Overview
 The **Crawler** software framework is designed to provide high-level autonomous navigation, sensor fusion, and robust communication with the physical robot platform. It builds upon two core software pillars:
-1. **OSGAR** (Open Source Autonomous Rover): Handing state-machine control, 2D/3D sensor processing (LiDAR, cameras), and mission-level path planning.
+1. **OSGAR** (Open Source Garden/Generic Autonomous Robot): Handling state-machine control, 2D/3D sensor processing (LiDAR, cameras), and mission-level path planning.
 2. **PyMAVLink**: Serving as the communication layer for low-level motor, steering, and throttle controls via standard MAVLink messages (e.g., overriding RC channels for differential drive control).
 
 ### The Platform: Hecthor / Hector III (ČZU / ProLab)
@@ -53,8 +53,6 @@ To start the control interface or verification script:
 uv run main.py
 ```
 
-Currently, the system is configured to perform a safe connection sequence and execute a dry-run test (as captured in the debug outputs, ensuring safety by validating commands on a raised platform: *"Pásy do vzduchu!"*).
-
 ---
 
 <a name="cesky"></a>
@@ -62,7 +60,7 @@ Currently, the system is configured to perform a safe connection sequence and ex
 
 ### Přehled
 Softwarový rámec **Crawler** je navržen tak, aby poskytoval autonomní navigaci na vysoké úrovni, fúzi senzorických dat a robustní komunikaci s fyzickou robotickou platformou. Stojí na dvou hlavních softwarových pilířích:
-1. **OSGAR** (Open Source Autonomous Rover): Zajišťuje řízení stavového stroje, zpracování dat z 2D/3D senzorů (LiDAR, kamery) a plánování tras na úrovni mise.
+1. **OSGAR** (Open Source Garden/Generic Autonomous Robot): Zajišťuje řízení stavového stroje, zpracování dat z 2D/3D senzorů (LiDAR, kamery) a plánování tras na úrovni mise.
 2. **PyMAVLink**: Slouží jako komunikační vrstva pro nízkoúrovňové řízení motorů, zatáčení a plynu pomocí standardních zpráv protokolu MAVLink (např. přepisování RC kanálů pro diferenciální řízení pásů).
 
 ### Robotická platforma: Hecthor / Hector III (ČZU / ProLab)
@@ -93,5 +91,3 @@ Pro spuštění komunikačního rozhraní nebo ověřovacího skriptu:
 ```bash
 uv run main.py
 ```
-
-V současné době je systém nakonfigurován tak, aby navázal bezpečné spojení s autopilotem a provedl suchý test funkčnosti (při zajištěném robotu s pásy ve vzduchu, viz log `data/output.txt`: *„Pásy do vzduchu!“*).
