@@ -1,0 +1,708 @@
+Microsoft Windows [Version 10.0.26200.8246]
+(c) Microsoft Corporation. Všechna práva vyhrazena.
+
+C:\Users\work>ssh robot@192.168.1.109
+Welcome to Ubuntu 26.04 LTS (GNU/Linux 7.0.0-15-generic x86_64)
+
+ * Documentation:  https://docs.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+ System information as of Mon May 11 01:30:14 PM UTC 2026
+
+  System load:    0.01               Temperature:             56.9 C
+  Usage of /home: 0.0% of 816.35GB   Processes:               184
+  Memory usage:   2%                 Users logged in:         0
+  Swap usage:     0%                 IPv4 address for enp2s0: 192.168.1.109
+
+
+Expanded Security Maintenance for Applications is not enabled.
+
+0 updates can be applied immediately.
+
+Enable ESM Apps to receive additional future security updates.
+See https://ubuntu.com/esm or run: sudo pro status
+
+
+Last login: Mon May 11 13:25:14 2026 from 192.168.1.63
+robot@robot:~$ uname -a
+Linux robot 7.0.0-15-generic #15-Ubuntu SMP PREEMPT_DYNAMIC Wed Apr 22 16:06:43 UTC 2026 x86_64 GNU/Linux
+robot@robot:~$ hostnamectl
+ Static hostname: robot
+       Icon name: computer-desktop
+         Chassis: desktop 🖥️
+      Machine ID: 2f87c4402bb84f78be99e989e4c01227
+         Boot ID: 9e1fc43db1764fa3b0bb3658780159c0
+Operating System: Ubuntu 26.04 LTS
+          Kernel: Linux 7.0.0-15-generic
+    Architecture: x86-64
+ Hardware Vendor: HARDKERNEL
+  Hardware Model: ODROID-H4
+Hardware Version: 1.0
+Firmware Version: 1.8
+   Firmware Date: Fri 2025-01-17
+    Firmware Age: 1y 3month 3w 2d
+robot@robot:~$ lscpu
+Architecture:                x86_64
+  CPU op-mode(s):            32-bit, 64-bit
+  Address sizes:             39 bits physical, 48 bits virtual
+  Byte Order:                Little Endian
+CPU(s):                      8
+  On-line CPU(s) list:       0-7
+Vendor ID:                   GenuineIntel
+  Model name:                Intel(R) Core(TM) i3-N305
+    CPU family:              6
+    Model:                   190
+    Thread(s) per core:      1
+    Core(s) per socket:      8
+    Socket(s):               1
+    Stepping:                0
+    CPU(s) scaling MHz:      23%
+    CPU max MHz:             3800.0000
+    CPU min MHz:             800.0000
+    BogoMIPS:                3609.60
+    Flags:                   fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc art arch_perfmon p
+                             ebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf tsc_known_freq pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic
+                             movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault epb cat_l2 cdp_l2 ssbd ibrs ibpb stibp ibrs_enhanced tpr_shadow flexpriority ept vpi
+                             d ept_ad fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid rdt_a rdseed adx smap clflushopt clwb intel_pt sha_ni xsaveopt xsavec xgetbv1 xsaves split_lock_detect user_shstk avx_
+                             vnni dtherm ida arat pln pts hwp hwp_notify hwp_act_window hwp_epp hwp_pkg_req vnmi umip pku ospke waitpkg gfni vaes vpclmulqdq rdpid movdiri movdir64b fsrm md_clear serialize arch
+                             _lbr ibt flush_l1d arch_capabilities
+Virtualization features:
+  Virtualization:            VT-x
+Caches (sum of all):
+  L1d:                       256 KiB (8 instances)
+  L1i:                       512 KiB (8 instances)
+  L2:                        4 MiB (2 instances)
+  L3:                        6 MiB (1 instance)
+NUMA:
+  NUMA node(s):              1
+  NUMA node0 CPU(s):         0-7
+Vulnerabilities:
+  Gather data sampling:      Not affected
+  Ghostwrite:                Not affected
+  Indirect target selection: Not affected
+  Itlb multihit:             Not affected
+  L1tf:                      Not affected
+  Mds:                       Not affected
+  Meltdown:                  Not affected
+  Mmio stale data:           Not affected
+  Old microcode:             Not affected
+  Reg file data sampling:    Mitigation; Clear Register File
+  Retbleed:                  Not affected
+  Spec rstack overflow:      Not affected
+  Spec store bypass:         Mitigation; Speculative Store Bypass disabled via prctl
+  Spectre v1:                Mitigation; usercopy/swapgs barriers and __user pointer sanitization
+  Spectre v2:                Mitigation; Enhanced / Automatic IBRS; IBPB conditional; PBRSB-eIBRS Not affected; BHI BHI_DIS_S
+  Srbds:                     Not affected
+  Tsa:                       Not affected
+  Tsx async abort:           Not affected
+  Vmscape:                   Mitigation; IBPB before exit to userspace
+robot@robot:~$ timedatectl status
+               Local time: Mon 2026-05-11 20:22:19 UTC
+           Universal time: Mon 2026-05-11 20:22:19 UTC
+                 RTC time: Mon 2026-05-11 20:22:19
+                Time zone: Etc/UTC (UTC, +0000)
+System clock synchronized: yes
+              NTP service: active
+          RTC in local TZ: no
+robot@robot:~$ jobs
+robot@robot:~$ cd git
+robot@robot:~/git$ cd crawler/
+robot@robot:~/git/crawler$ ls
+os-install
+robot@robot:~/git/crawler$ sudo usermod -aG dialout $USER
+[sudo: authenticate] Password:
+robot@robot:~/git/crawler$ cd ~/git/crawler
+robot@robot:~/git/crawler$ uv venv
+Using CPython 3.14.4 interpreter at: /usr/bin/python3
+Creating virtual environment at: .venv
+Activate with: source .venv/bin/activate
+robot@robot:~/git/crawler$ source .venv/bin/activate
+(crawler) robot@robot:~/git/crawler$ uv pip install osgar==1.0.0 pymavlink
+Resolved 5 packages in 1.10s
+  × Failed to build `pymavlink==2.4.49`
+  ├─▶ The build backend returned an error
+  ╰─▶ Call to `setuptools.build_meta.build_wheel` failed (exit status: 1)
+
+      [stdout]
+      running bdist_wheel
+      running build
+      running build_py
+      Using message definitions from /home/robot/.cache/uv/sdists-v9/pypi/pymavlink/2.4.49/kgLqUituTkXlmYOh/src/message_definitions
+      Building /home/robot/.cache/uv/sdists-v9/pypi/pymavlink/2.4.49/kgLqUituTkXlmYOh/src/message_definitions/v1.0/cubepilot.xml for protocol 1.0
+      Building /home/robot/.cache/uv/sdists-v9/pypi/pymavlink/2.4.49/kgLqUituTkXlmYOh/src/message_definitions/v1.0/ASLUAV.xml for protocol 1.0
+      Building /home/robot/.cache/uv/sdists-v9/pypi/pymavlink/2.4.49/kgLqUituTkXlmYOh/src/message_definitions/v1.0/loweheiser.xml for protocol 1.0
+      Building /home/robot/.cache/uv/sdists-v9/pypi/pymavlink/2.4.49/kgLqUituTkXlmYOh/src/message_definitions/v1.0/all.xml for protocol 1.0
+      Building /home/robot/.cache/uv/sdists-v9/pypi/pymavlink/2.4.49/kgLqUituTkXlmYOh/src/message_definitions/v1.0/storm32.xml for protocol 1.0
+      Building /home/robot/.cache/uv/sdists-v9/pypi/pymavlink/2.4.49/kgLqUituTkXlmYOh/src/message_definitions/v1.0/standard.xml for protocol 1.0
+      Building /home/robot/.cache/uv/sdists-v9/pypi/pymavlink/2.4.49/kgLqUituTkXlmYOh/src/message_definitions/v1.0/csAirLink.xml for protocol 1.0
+      Building /home/robot/.cache/uv/sdists-v9/pypi/pymavlink/2.4.49/kgLqUituTkXlmYOh/src/message_definitions/v1.0/paparazzi.xml for protocol 1.0
+      Building /home/robot/.cache/uv/sdists-v9/pypi/pymavlink/2.4.49/kgLqUituTkXlmYOh/src/message_definitions/v1.0/development.xml for protocol 1.0
+      Building /home/robot/.cache/uv/sdists-v9/pypi/pymavlink/2.4.49/kgLqUituTkXlmYOh/src/message_definitions/v1.0/minimal.xml for protocol 1.0
+      Building /home/robot/.cache/uv/sdists-v9/pypi/pymavlink/2.4.49/kgLqUituTkXlmYOh/src/message_definitions/v1.0/matrixpilot.xml for protocol 1.0
+      Building /home/robot/.cache/uv/sdists-v9/pypi/pymavlink/2.4.49/kgLqUituTkXlmYOh/src/message_definitions/v1.0/uAvionix.xml for protocol 1.0
+      Building /home/robot/.cache/uv/sdists-v9/pypi/pymavlink/2.4.49/kgLqUituTkXlmYOh/src/message_definitions/v1.0/ardupilotmega.xml for protocol 1.0
+      Building /home/robot/.cache/uv/sdists-v9/pypi/pymavlink/2.4.49/kgLqUituTkXlmYOh/src/message_definitions/v1.0/AVSSUAS.xml for protocol 1.0
+      Building /home/robot/.cache/uv/sdists-v9/pypi/pymavlink/2.4.49/kgLqUituTkXlmYOh/src/message_definitions/v1.0/ualberta.xml for protocol 1.0
+      Building /home/robot/.cache/uv/sdists-v9/pypi/pymavlink/2.4.49/kgLqUituTkXlmYOh/src/message_definitions/v1.0/icarous.xml for protocol 1.0
+      Building /home/robot/.cache/uv/sdists-v9/pypi/pymavlink/2.4.49/kgLqUituTkXlmYOh/src/message_definitions/v1.0/test.xml for protocol 1.0
+      Building /home/robot/.cache/uv/sdists-v9/pypi/pymavlink/2.4.49/kgLqUituTkXlmYOh/src/message_definitions/v1.0/common.xml for protocol 1.0
+      Building /home/robot/.cache/uv/sdists-v9/pypi/pymavlink/2.4.49/kgLqUituTkXlmYOh/src/message_definitions/v1.0/python_array_test.xml for protocol 1.0
+      Building /home/robot/.cache/uv/sdists-v9/pypi/pymavlink/2.4.49/kgLqUituTkXlmYOh/src/message_definitions/v1.0/cubepilot.xml for protocol 2.0
+      Building /home/robot/.cache/uv/sdists-v9/pypi/pymavlink/2.4.49/kgLqUituTkXlmYOh/src/message_definitions/v1.0/ASLUAV.xml for protocol 2.0
+      Building /home/robot/.cache/uv/sdists-v9/pypi/pymavlink/2.4.49/kgLqUituTkXlmYOh/src/message_definitions/v1.0/loweheiser.xml for protocol 2.0
+      Building /home/robot/.cache/uv/sdists-v9/pypi/pymavlink/2.4.49/kgLqUituTkXlmYOh/src/message_definitions/v1.0/all.xml for protocol 2.0
+      Building /home/robot/.cache/uv/sdists-v9/pypi/pymavlink/2.4.49/kgLqUituTkXlmYOh/src/message_definitions/v1.0/storm32.xml for protocol 2.0
+      Building /home/robot/.cache/uv/sdists-v9/pypi/pymavlink/2.4.49/kgLqUituTkXlmYOh/src/message_definitions/v1.0/standard.xml for protocol 2.0
+      Building /home/robot/.cache/uv/sdists-v9/pypi/pymavlink/2.4.49/kgLqUituTkXlmYOh/src/message_definitions/v1.0/csAirLink.xml for protocol 2.0
+      Building /home/robot/.cache/uv/sdists-v9/pypi/pymavlink/2.4.49/kgLqUituTkXlmYOh/src/message_definitions/v1.0/paparazzi.xml for protocol 2.0
+      Building /home/robot/.cache/uv/sdists-v9/pypi/pymavlink/2.4.49/kgLqUituTkXlmYOh/src/message_definitions/v1.0/development.xml for protocol 2.0
+      Building /home/robot/.cache/uv/sdists-v9/pypi/pymavlink/2.4.49/kgLqUituTkXlmYOh/src/message_definitions/v1.0/minimal.xml for protocol 2.0
+      Building /home/robot/.cache/uv/sdists-v9/pypi/pymavlink/2.4.49/kgLqUituTkXlmYOh/src/message_definitions/v1.0/matrixpilot.xml for protocol 2.0
+      Building /home/robot/.cache/uv/sdists-v9/pypi/pymavlink/2.4.49/kgLqUituTkXlmYOh/src/message_definitions/v1.0/uAvionix.xml for protocol 2.0
+      Building /home/robot/.cache/uv/sdists-v9/pypi/pymavlink/2.4.49/kgLqUituTkXlmYOh/src/message_definitions/v1.0/ardupilotmega.xml for protocol 2.0
+      Building /home/robot/.cache/uv/sdists-v9/pypi/pymavlink/2.4.49/kgLqUituTkXlmYOh/src/message_definitions/v1.0/AVSSUAS.xml for protocol 2.0
+      Building /home/robot/.cache/uv/sdists-v9/pypi/pymavlink/2.4.49/kgLqUituTkXlmYOh/src/message_definitions/v1.0/ualberta.xml for protocol 2.0
+      Building /home/robot/.cache/uv/sdists-v9/pypi/pymavlink/2.4.49/kgLqUituTkXlmYOh/src/message_definitions/v1.0/icarous.xml for protocol 2.0
+      Building /home/robot/.cache/uv/sdists-v9/pypi/pymavlink/2.4.49/kgLqUituTkXlmYOh/src/message_definitions/v1.0/test.xml for protocol 2.0
+      Building /home/robot/.cache/uv/sdists-v9/pypi/pymavlink/2.4.49/kgLqUituTkXlmYOh/src/message_definitions/v1.0/common.xml for protocol 2.0
+      Building /home/robot/.cache/uv/sdists-v9/pypi/pymavlink/2.4.49/kgLqUituTkXlmYOh/src/message_definitions/v1.0/python_array_test.xml for protocol 2.0
+      creating build/lib.linux-x86_64-cpython-314/pymavlink
+      copying ./quaternion.py -> build/lib.linux-x86_64-cpython-314/pymavlink
+      copying ./mavwp.py -> build/lib.linux-x86_64-cpython-314/pymavlink
+      copying ./mavextra.py -> build/lib.linux-x86_64-cpython-314/pymavlink
+      copying ./rotmat.py -> build/lib.linux-x86_64-cpython-314/pymavlink
+      copying ./mavexpression.py -> build/lib.linux-x86_64-cpython-314/pymavlink
+      copying ./mavftp.py -> build/lib.linux-x86_64-cpython-314/pymavlink
+      copying ./mavutil.py -> build/lib.linux-x86_64-cpython-314/pymavlink
+      copying ./__init__.py -> build/lib.linux-x86_64-cpython-314/pymavlink
+      copying ./mavparm.py -> build/lib.linux-x86_64-cpython-314/pymavlink
+      copying ./fgFDM.py -> build/lib.linux-x86_64-cpython-314/pymavlink
+      copying ./mavtestgen.py -> build/lib.linux-x86_64-cpython-314/pymavlink
+      copying ./CSVReader.py -> build/lib.linux-x86_64-cpython-314/pymavlink
+      copying ./setup.py -> build/lib.linux-x86_64-cpython-314/pymavlink
+      copying ./mavftpfs.py -> build/lib.linux-x86_64-cpython-314/pymavlink
+      copying ./mavftp_op.py -> build/lib.linux-x86_64-cpython-314/pymavlink
+      copying ./DFReader.py -> build/lib.linux-x86_64-cpython-314/pymavlink
+      creating build/lib.linux-x86_64-cpython-314/pymavlink/generator
+      copying ./generator/mavgen_cs.py -> build/lib.linux-x86_64-cpython-314/pymavlink/generator
+      copying ./generator/mavcrc.py -> build/lib.linux-x86_64-cpython-314/pymavlink/generator
+      copying ./generator/mavgen_javascript.py -> build/lib.linux-x86_64-cpython-314/pymavlink/generator
+      copying ./generator/mavgen_python.py -> build/lib.linux-x86_64-cpython-314/pymavlink/generator
+      copying ./generator/mavgen.py -> build/lib.linux-x86_64-cpython-314/pymavlink/generator
+      copying ./generator/mavgen_lua.py -> build/lib.linux-x86_64-cpython-314/pymavlink/generator
+      copying ./generator/mavgen_cpp11.py -> build/lib.linux-x86_64-cpython-314/pymavlink/generator
+      copying ./generator/mavgen_c.py -> build/lib.linux-x86_64-cpython-314/pymavlink/generator
+      copying ./generator/__init__.py -> build/lib.linux-x86_64-cpython-314/pymavlink/generator
+      copying ./generator/mavgen_ada.py -> build/lib.linux-x86_64-cpython-314/pymavlink/generator
+      copying ./generator/mavgen_typescript.py -> build/lib.linux-x86_64-cpython-314/pymavlink/generator
+      copying ./generator/mavgen_java.py -> build/lib.linux-x86_64-cpython-314/pymavlink/generator
+      copying ./generator/mavtemplate.py -> build/lib.linux-x86_64-cpython-314/pymavlink/generator
+      copying ./generator/mavgen_spin2.py -> build/lib.linux-x86_64-cpython-314/pymavlink/generator
+      copying ./generator/mavgen_objc.py -> build/lib.linux-x86_64-cpython-314/pymavlink/generator
+      copying ./generator/mavgen_javascript_stable.py -> build/lib.linux-x86_64-cpython-314/pymavlink/generator
+      copying ./generator/mavparse.py -> build/lib.linux-x86_64-cpython-314/pymavlink/generator
+      copying ./generator/mavgen_swift.py -> build/lib.linux-x86_64-cpython-314/pymavlink/generator
+      copying ./generator/mavgen_wlua.py -> build/lib.linux-x86_64-cpython-314/pymavlink/generator
+      creating build/lib.linux-x86_64-cpython-314/pymavlink/dialects
+      copying ./dialects/__init__.py -> build/lib.linux-x86_64-cpython-314/pymavlink/dialects
+      creating build/lib.linux-x86_64-cpython-314/pymavlink/dialects/v10
+      copying ./dialects/v10/development.py -> build/lib.linux-x86_64-cpython-314/pymavlink/dialects/v10
+      copying ./dialects/v10/minimal.py -> build/lib.linux-x86_64-cpython-314/pymavlink/dialects/v10
+      copying ./dialects/v10/python_array_test.py -> build/lib.linux-x86_64-cpython-314/pymavlink/dialects/v10
+      copying ./dialects/v10/storm32.py -> build/lib.linux-x86_64-cpython-314/pymavlink/dialects/v10
+      copying ./dialects/v10/test.py -> build/lib.linux-x86_64-cpython-314/pymavlink/dialects/v10
+      copying ./dialects/v10/all.py -> build/lib.linux-x86_64-cpython-314/pymavlink/dialects/v10
+      copying ./dialects/v10/matrixpilot.py -> build/lib.linux-x86_64-cpython-314/pymavlink/dialects/v10
+      copying ./dialects/v10/__init__.py -> build/lib.linux-x86_64-cpython-314/pymavlink/dialects/v10
+      copying ./dialects/v10/paparazzi.py -> build/lib.linux-x86_64-cpython-314/pymavlink/dialects/v10
+      copying ./dialects/v10/ualberta.py -> build/lib.linux-x86_64-cpython-314/pymavlink/dialects/v10
+      copying ./dialects/v10/cubepilot.py -> build/lib.linux-x86_64-cpython-314/pymavlink/dialects/v10
+      copying ./dialects/v10/AVSSUAS.py -> build/lib.linux-x86_64-cpython-314/pymavlink/dialects/v10
+      copying ./dialects/v10/ardupilotmega.py -> build/lib.linux-x86_64-cpython-314/pymavlink/dialects/v10
+      copying ./dialects/v10/csAirLink.py -> build/lib.linux-x86_64-cpython-314/pymavlink/dialects/v10
+      copying ./dialects/v10/uAvionix.py -> build/lib.linux-x86_64-cpython-314/pymavlink/dialects/v10
+      copying ./dialects/v10/icarous.py -> build/lib.linux-x86_64-cpython-314/pymavlink/dialects/v10
+      copying ./dialects/v10/common.py -> build/lib.linux-x86_64-cpython-314/pymavlink/dialects/v10
+      copying ./dialects/v10/standard.py -> build/lib.linux-x86_64-cpython-314/pymavlink/dialects/v10
+      copying ./dialects/v10/loweheiser.py -> build/lib.linux-x86_64-cpython-314/pymavlink/dialects/v10
+      copying ./dialects/v10/ASLUAV.py -> build/lib.linux-x86_64-cpython-314/pymavlink/dialects/v10
+      creating build/lib.linux-x86_64-cpython-314/pymavlink/dialects/v20
+      copying ./dialects/v20/development.py -> build/lib.linux-x86_64-cpython-314/pymavlink/dialects/v20
+      copying ./dialects/v20/minimal.py -> build/lib.linux-x86_64-cpython-314/pymavlink/dialects/v20
+      copying ./dialects/v20/python_array_test.py -> build/lib.linux-x86_64-cpython-314/pymavlink/dialects/v20
+      copying ./dialects/v20/storm32.py -> build/lib.linux-x86_64-cpython-314/pymavlink/dialects/v20
+      copying ./dialects/v20/test.py -> build/lib.linux-x86_64-cpython-314/pymavlink/dialects/v20
+      copying ./dialects/v20/all.py -> build/lib.linux-x86_64-cpython-314/pymavlink/dialects/v20
+      copying ./dialects/v20/matrixpilot.py -> build/lib.linux-x86_64-cpython-314/pymavlink/dialects/v20
+      copying ./dialects/v20/__init__.py -> build/lib.linux-x86_64-cpython-314/pymavlink/dialects/v20
+      copying ./dialects/v20/paparazzi.py -> build/lib.linux-x86_64-cpython-314/pymavlink/dialects/v20
+      copying ./dialects/v20/ualberta.py -> build/lib.linux-x86_64-cpython-314/pymavlink/dialects/v20
+      copying ./dialects/v20/cubepilot.py -> build/lib.linux-x86_64-cpython-314/pymavlink/dialects/v20
+      copying ./dialects/v20/AVSSUAS.py -> build/lib.linux-x86_64-cpython-314/pymavlink/dialects/v20
+      copying ./dialects/v20/ardupilotmega.py -> build/lib.linux-x86_64-cpython-314/pymavlink/dialects/v20
+      copying ./dialects/v20/csAirLink.py -> build/lib.linux-x86_64-cpython-314/pymavlink/dialects/v20
+      copying ./dialects/v20/uAvionix.py -> build/lib.linux-x86_64-cpython-314/pymavlink/dialects/v20
+      copying ./dialects/v20/icarous.py -> build/lib.linux-x86_64-cpython-314/pymavlink/dialects/v20
+      copying ./dialects/v20/common.py -> build/lib.linux-x86_64-cpython-314/pymavlink/dialects/v20
+      copying ./dialects/v20/standard.py -> build/lib.linux-x86_64-cpython-314/pymavlink/dialects/v20
+      copying ./dialects/v20/loweheiser.py -> build/lib.linux-x86_64-cpython-314/pymavlink/dialects/v20
+      copying ./dialects/v20/ASLUAV.py -> build/lib.linux-x86_64-cpython-314/pymavlink/dialects/v20
+      creating build/lib.linux-x86_64-cpython-314/pymavlink/dfindexer
+      copying ./dfindexer/__init__.py -> build/lib.linux-x86_64-cpython-314/pymavlink/dfindexer
+      creating build/lib.linux-x86_64-cpython-314/pymavlink/message_definitions/v1.0
+      copying ./message_definitions/v1.0/cubepilot.xml -> build/lib.linux-x86_64-cpython-314/pymavlink/message_definitions/v1.0
+      copying ./message_definitions/v1.0/ASLUAV.xml -> build/lib.linux-x86_64-cpython-314/pymavlink/message_definitions/v1.0
+      copying ./message_definitions/v1.0/loweheiser.xml -> build/lib.linux-x86_64-cpython-314/pymavlink/message_definitions/v1.0
+      copying ./message_definitions/v1.0/all.xml -> build/lib.linux-x86_64-cpython-314/pymavlink/message_definitions/v1.0
+      copying ./message_definitions/v1.0/storm32.xml -> build/lib.linux-x86_64-cpython-314/pymavlink/message_definitions/v1.0
+      copying ./message_definitions/v1.0/standard.xml -> build/lib.linux-x86_64-cpython-314/pymavlink/message_definitions/v1.0
+      copying ./message_definitions/v1.0/csAirLink.xml -> build/lib.linux-x86_64-cpython-314/pymavlink/message_definitions/v1.0
+      copying ./message_definitions/v1.0/paparazzi.xml -> build/lib.linux-x86_64-cpython-314/pymavlink/message_definitions/v1.0
+      copying ./message_definitions/v1.0/development.xml -> build/lib.linux-x86_64-cpython-314/pymavlink/message_definitions/v1.0
+      copying ./message_definitions/v1.0/minimal.xml -> build/lib.linux-x86_64-cpython-314/pymavlink/message_definitions/v1.0
+      copying ./message_definitions/v1.0/matrixpilot.xml -> build/lib.linux-x86_64-cpython-314/pymavlink/message_definitions/v1.0
+      copying ./message_definitions/v1.0/uAvionix.xml -> build/lib.linux-x86_64-cpython-314/pymavlink/message_definitions/v1.0
+      copying ./message_definitions/v1.0/ardupilotmega.xml -> build/lib.linux-x86_64-cpython-314/pymavlink/message_definitions/v1.0
+      copying ./message_definitions/v1.0/AVSSUAS.xml -> build/lib.linux-x86_64-cpython-314/pymavlink/message_definitions/v1.0
+      copying ./message_definitions/v1.0/ualberta.xml -> build/lib.linux-x86_64-cpython-314/pymavlink/message_definitions/v1.0
+      copying ./message_definitions/v1.0/icarous.xml -> build/lib.linux-x86_64-cpython-314/pymavlink/message_definitions/v1.0
+      copying ./message_definitions/v1.0/test.xml -> build/lib.linux-x86_64-cpython-314/pymavlink/message_definitions/v1.0
+      copying ./message_definitions/v1.0/common.xml -> build/lib.linux-x86_64-cpython-314/pymavlink/message_definitions/v1.0
+      copying ./message_definitions/v1.0/python_array_test.xml -> build/lib.linux-x86_64-cpython-314/pymavlink/message_definitions/v1.0
+      copying ./generator/mavschema.xsd -> build/lib.linux-x86_64-cpython-314/pymavlink/generator
+      creating build/lib.linux-x86_64-cpython-314/pymavlink/generator/java/lib
+      copying ./generator/java/lib/Parser.java -> build/lib.linux-x86_64-cpython-314/pymavlink/generator/java/lib
+      creating build/lib.linux-x86_64-cpython-314/pymavlink/generator/java/lib/Messages
+      copying ./generator/java/lib/Messages/Units.java -> build/lib.linux-x86_64-cpython-314/pymavlink/generator/java/lib/Messages
+      copying ./generator/java/lib/Messages/MAVLinkStats.java -> build/lib.linux-x86_64-cpython-314/pymavlink/generator/java/lib/Messages
+      copying ./generator/java/lib/Messages/Description.java -> build/lib.linux-x86_64-cpython-314/pymavlink/generator/java/lib/Messages
+      copying ./generator/java/lib/Messages/MAVLinkMessage.java -> build/lib.linux-x86_64-cpython-314/pymavlink/generator/java/lib/Messages
+      copying ./generator/java/lib/Messages/UnitsEnum.java -> build/lib.linux-x86_64-cpython-314/pymavlink/generator/java/lib/Messages
+      copying ./generator/java/lib/Messages/MAVLinkPayload.java -> build/lib.linux-x86_64-cpython-314/pymavlink/generator/java/lib/Messages
+      creating build/lib.linux-x86_64-cpython-314/pymavlink/generator/C/include_v1.0
+      copying ./generator/C/include_v1.0/mavlink_conversions.h -> build/lib.linux-x86_64-cpython-314/pymavlink/generator/C/include_v1.0
+      copying ./generator/C/include_v1.0/protocol.h -> build/lib.linux-x86_64-cpython-314/pymavlink/generator/C/include_v1.0
+      copying ./generator/C/include_v1.0/mavlink_types.h -> build/lib.linux-x86_64-cpython-314/pymavlink/generator/C/include_v1.0
+      copying ./generator/C/include_v1.0/checksum.h -> build/lib.linux-x86_64-cpython-314/pymavlink/generator/C/include_v1.0
+      copying ./generator/C/include_v1.0/mavlink_helpers.h -> build/lib.linux-x86_64-cpython-314/pymavlink/generator/C/include_v1.0
+      creating build/lib.linux-x86_64-cpython-314/pymavlink/generator/C/include_v2.0
+      copying ./generator/C/include_v2.0/mavlink_conversions.h -> build/lib.linux-x86_64-cpython-314/pymavlink/generator/C/include_v2.0
+      copying ./generator/C/include_v2.0/protocol.h -> build/lib.linux-x86_64-cpython-314/pymavlink/generator/C/include_v2.0
+      copying ./generator/C/include_v2.0/mavlink_get_info.h -> build/lib.linux-x86_64-cpython-314/pymavlink/generator/C/include_v2.0
+      copying ./generator/C/include_v2.0/mavlink_types.h -> build/lib.linux-x86_64-cpython-314/pymavlink/generator/C/include_v2.0
+      copying ./generator/C/include_v2.0/checksum.h -> build/lib.linux-x86_64-cpython-314/pymavlink/generator/C/include_v2.0
+      copying ./generator/C/include_v2.0/mavlink_helpers.h -> build/lib.linux-x86_64-cpython-314/pymavlink/generator/C/include_v2.0
+      copying ./generator/C/include_v2.0/mavlink_sha256.h -> build/lib.linux-x86_64-cpython-314/pymavlink/generator/C/include_v2.0
+      creating build/lib.linux-x86_64-cpython-314/pymavlink/generator/CPP11/include_v2.0
+      copying ./generator/CPP11/include_v2.0/message.hpp -> build/lib.linux-x86_64-cpython-314/pymavlink/generator/CPP11/include_v2.0
+      copying ./generator/CPP11/include_v2.0/msgmap.hpp -> build/lib.linux-x86_64-cpython-314/pymavlink/generator/CPP11/include_v2.0
+      creating build/lib.linux-x86_64-cpython-314/pymavlink/generator/CS
+      copying ./generator/CS/MAVLink.csproj -> build/lib.linux-x86_64-cpython-314/pymavlink/generator/CS
+      copying ./generator/CS/MavlinkUtil.cs -> build/lib.linux-x86_64-cpython-314/pymavlink/generator/CS
+      copying ./generator/CS/MAVLinkMessage.cs -> build/lib.linux-x86_64-cpython-314/pymavlink/generator/CS
+      copying ./generator/CS/MavlinkCRC.cs -> build/lib.linux-x86_64-cpython-314/pymavlink/generator/CS
+      copying ./generator/CS/MavlinkParse.cs -> build/lib.linux-x86_64-cpython-314/pymavlink/generator/CS
+      creating build/lib.linux-x86_64-cpython-314/pymavlink/generator/swift
+      copying ./generator/swift/MAVLink.swift -> build/lib.linux-x86_64-cpython-314/pymavlink/generator/swift
+      copying ./dialects/v10/cubepilot.xml -> build/lib.linux-x86_64-cpython-314/pymavlink/dialects/v10
+      copying ./dialects/v10/ASLUAV.xml -> build/lib.linux-x86_64-cpython-314/pymavlink/dialects/v10
+      copying ./dialects/v10/loweheiser.xml -> build/lib.linux-x86_64-cpython-314/pymavlink/dialects/v10
+      copying ./dialects/v10/all.xml -> build/lib.linux-x86_64-cpython-314/pymavlink/dialects/v10
+      copying ./dialects/v10/storm32.xml -> build/lib.linux-x86_64-cpython-314/pymavlink/dialects/v10
+      copying ./dialects/v10/standard.xml -> build/lib.linux-x86_64-cpython-314/pymavlink/dialects/v10
+      copying ./dialects/v10/csAirLink.xml -> build/lib.linux-x86_64-cpython-314/pymavlink/dialects/v10
+      copying ./dialects/v10/paparazzi.xml -> build/lib.linux-x86_64-cpython-314/pymavlink/dialects/v10
+      copying ./dialects/v10/development.xml -> build/lib.linux-x86_64-cpython-314/pymavlink/dialects/v10
+      copying ./dialects/v10/minimal.xml -> build/lib.linux-x86_64-cpython-314/pymavlink/dialects/v10
+      copying ./dialects/v10/matrixpilot.xml -> build/lib.linux-x86_64-cpython-314/pymavlink/dialects/v10
+      copying ./dialects/v10/uAvionix.xml -> build/lib.linux-x86_64-cpython-314/pymavlink/dialects/v10
+      copying ./dialects/v10/ardupilotmega.xml -> build/lib.linux-x86_64-cpython-314/pymavlink/dialects/v10
+      copying ./dialects/v10/AVSSUAS.xml -> build/lib.linux-x86_64-cpython-314/pymavlink/dialects/v10
+      copying ./dialects/v10/ualberta.xml -> build/lib.linux-x86_64-cpython-314/pymavlink/dialects/v10
+      copying ./dialects/v10/icarous.xml -> build/lib.linux-x86_64-cpython-314/pymavlink/dialects/v10
+      copying ./dialects/v10/test.xml -> build/lib.linux-x86_64-cpython-314/pymavlink/dialects/v10
+      copying ./dialects/v10/common.xml -> build/lib.linux-x86_64-cpython-314/pymavlink/dialects/v10
+      copying ./dialects/v10/python_array_test.xml -> build/lib.linux-x86_64-cpython-314/pymavlink/dialects/v10
+      copying ./dialects/v20/cubepilot.xml -> build/lib.linux-x86_64-cpython-314/pymavlink/dialects/v20
+      copying ./dialects/v20/ASLUAV.xml -> build/lib.linux-x86_64-cpython-314/pymavlink/dialects/v20
+      copying ./dialects/v20/loweheiser.xml -> build/lib.linux-x86_64-cpython-314/pymavlink/dialects/v20
+      copying ./dialects/v20/all.xml -> build/lib.linux-x86_64-cpython-314/pymavlink/dialects/v20
+      copying ./dialects/v20/storm32.xml -> build/lib.linux-x86_64-cpython-314/pymavlink/dialects/v20
+      copying ./dialects/v20/standard.xml -> build/lib.linux-x86_64-cpython-314/pymavlink/dialects/v20
+      copying ./dialects/v20/csAirLink.xml -> build/lib.linux-x86_64-cpython-314/pymavlink/dialects/v20
+      copying ./dialects/v20/paparazzi.xml -> build/lib.linux-x86_64-cpython-314/pymavlink/dialects/v20
+      copying ./dialects/v20/development.xml -> build/lib.linux-x86_64-cpython-314/pymavlink/dialects/v20
+      copying ./dialects/v20/minimal.xml -> build/lib.linux-x86_64-cpython-314/pymavlink/dialects/v20
+      copying ./dialects/v20/matrixpilot.xml -> build/lib.linux-x86_64-cpython-314/pymavlink/dialects/v20
+      copying ./dialects/v20/uAvionix.xml -> build/lib.linux-x86_64-cpython-314/pymavlink/dialects/v20
+      copying ./dialects/v20/ardupilotmega.xml -> build/lib.linux-x86_64-cpython-314/pymavlink/dialects/v20
+      copying ./dialects/v20/AVSSUAS.xml -> build/lib.linux-x86_64-cpython-314/pymavlink/dialects/v20
+      copying ./dialects/v20/ualberta.xml -> build/lib.linux-x86_64-cpython-314/pymavlink/dialects/v20
+      copying ./dialects/v20/icarous.xml -> build/lib.linux-x86_64-cpython-314/pymavlink/dialects/v20
+      copying ./dialects/v20/test.xml -> build/lib.linux-x86_64-cpython-314/pymavlink/dialects/v20
+      copying ./dialects/v20/common.xml -> build/lib.linux-x86_64-cpython-314/pymavlink/dialects/v20
+      copying ./dialects/v20/python_array_test.xml -> build/lib.linux-x86_64-cpython-314/pymavlink/dialects/v20
+      running build_ext
+      building 'pymavlink.dfindexer.dfindexer_cy' extension
+      creating build/temp.linux-x86_64-cpython-314/dfindexer
+      x86_64-linux-gnu-gcc -fno-strict-overflow -Wsign-compare -DNDEBUG -g -O2 -Wall -fPIC -Idfindexer -Ipymavlink/dfindexer -I/home/robot/.cache/uv/builds-v0/.tmpnbwFvW/include -I/usr/include/python3.14 -c
+      dfindexer/dfindexer.c -o build/temp.linux-x86_64-cpython-314/dfindexer/dfindexer.o -O2
+
+      [stderr]
+      /home/robot/.cache/uv/builds-v0/.tmpnbwFvW/lib/python3.14/site-packages/setuptools/dist.py:765: SetuptoolsDeprecationWarning: License classifiers are deprecated.
+      !!
+
+              ********************************************************************************
+              Please consider removing the following classifiers in favor of a SPDX license expression:
+
+              License :: OSI Approved :: GNU Lesser General Public License v3 (LGPLv3)
+
+              See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.
+              ********************************************************************************
+
+      !!
+        self._finalize_license_expression()
+      WARNING: Failed to import lxml module etree. Are lxml, libxml2 and libxslt installed? XML validation will not be performed
+      WARNING: Failed to import lxml module etree. Are lxml, libxml2 and libxslt installed? XML validation will not be performed
+      WARNING: Failed to import lxml module etree. Are lxml, libxml2 and libxslt installed? XML validation will not be performed
+      WARNING: Failed to import lxml module etree. Are lxml, libxml2 and libxslt installed? XML validation will not be performed
+      WARNING: Failed to import lxml module etree. Are lxml, libxml2 and libxslt installed? XML validation will not be performed
+      WARNING: Failed to import lxml module etree. Are lxml, libxml2 and libxslt installed? XML validation will not be performed
+      WARNING: Failed to import lxml module etree. Are lxml, libxml2 and libxslt installed? XML validation will not be performed
+      WARNING: Failed to import lxml module etree. Are lxml, libxml2 and libxslt installed? XML validation will not be performed
+      WARNING: Failed to import lxml module etree. Are lxml, libxml2 and libxslt installed? XML validation will not be performed
+      WARNING: Failed to import lxml module etree. Are lxml, libxml2 and libxslt installed? XML validation will not be performed
+      WARNING: Failed to import lxml module etree. Are lxml, libxml2 and libxslt installed? XML validation will not be performed
+      WARNING: Failed to import lxml module etree. Are lxml, libxml2 and libxslt installed? XML validation will not be performed
+      WARNING: Failed to import lxml module etree. Are lxml, libxml2 and libxslt installed? XML validation will not be performed
+      WARNING: Failed to import lxml module etree. Are lxml, libxml2 and libxslt installed? XML validation will not be performed
+      WARNING: Failed to import lxml module etree. Are lxml, libxml2 and libxslt installed? XML validation will not be performed
+      WARNING: Failed to import lxml module etree. Are lxml, libxml2 and libxslt installed? XML validation will not be performed
+      WARNING: Failed to import lxml module etree. Are lxml, libxml2 and libxslt installed? XML validation will not be performed
+      WARNING: Failed to import lxml module etree. Are lxml, libxml2 and libxslt installed? XML validation will not be performed
+      WARNING: Failed to import lxml module etree. Are lxml, libxml2 and libxslt installed? XML validation will not be performed
+      WARNING: Failed to import lxml module etree. Are lxml, libxml2 and libxslt installed? XML validation will not be performed
+      WARNING: Failed to import lxml module etree. Are lxml, libxml2 and libxslt installed? XML validation will not be performed
+      WARNING: Failed to import lxml module etree. Are lxml, libxml2 and libxslt installed? XML validation will not be performed
+      WARNING: Failed to import lxml module etree. Are lxml, libxml2 and libxslt installed? XML validation will not be performed
+      WARNING: Failed to import lxml module etree. Are lxml, libxml2 and libxslt installed? XML validation will not be performed
+      WARNING: Failed to import lxml module etree. Are lxml, libxml2 and libxslt installed? XML validation will not be performed
+      WARNING: Failed to import lxml module etree. Are lxml, libxml2 and libxslt installed? XML validation will not be performed
+      WARNING: Failed to import lxml module etree. Are lxml, libxml2 and libxslt installed? XML validation will not be performed
+      WARNING: Failed to import lxml module etree. Are lxml, libxml2 and libxslt installed? XML validation will not be performed
+      WARNING: Failed to import lxml module etree. Are lxml, libxml2 and libxslt installed? XML validation will not be performed
+      WARNING: Failed to import lxml module etree. Are lxml, libxml2 and libxslt installed? XML validation will not be performed
+      WARNING: Failed to import lxml module etree. Are lxml, libxml2 and libxslt installed? XML validation will not be performed
+      WARNING: Failed to import lxml module etree. Are lxml, libxml2 and libxslt installed? XML validation will not be performed
+      WARNING: Failed to import lxml module etree. Are lxml, libxml2 and libxslt installed? XML validation will not be performed
+      WARNING: Failed to import lxml module etree. Are lxml, libxml2 and libxslt installed? XML validation will not be performed
+      WARNING: Failed to import lxml module etree. Are lxml, libxml2 and libxslt installed? XML validation will not be performed
+      WARNING: Failed to import lxml module etree. Are lxml, libxml2 and libxslt installed? XML validation will not be performed
+      WARNING: Failed to import lxml module etree. Are lxml, libxml2 and libxslt installed? XML validation will not be performed
+      WARNING: Failed to import lxml module etree. Are lxml, libxml2 and libxslt installed? XML validation will not be performed
+      error: command 'x86_64-linux-gnu-gcc' failed: No such file or directory
+
+      hint: This usually indicates a problem with the package or the build environment.
+(crawler) robot@robot:~/git/crawler$ sudo apt install -y build-essential python3-dev
+The following packages were automatically installed and are no longer required:
+  linux-headers-7.0.0-14          linux-image-unsigned-7.0.0-14-generic    linux-modules-7.0.0-14-generic  linux-tools-7.0.0-14-generic
+  linux-headers-7.0.0-14-generic  linux-main-modules-zfs-7.0.0-14-generic  linux-tools-7.0.0-14
+Use 'sudo apt autoremove' to remove them.
+
+Installing:
+  build-essential  python3-dev
+
+Installing dependencies:
+  cpp                      fakeroot                 gcc                      libalgorithm-diff-perl     libdpkg-perl            libgomp1    libmpc3            libtsan2           zlib1g-dev
+  cpp-15                   g++                      gcc-15                   libalgorithm-diff-xs-perl  libexpat1-dev           libhwasan0  libpython3-dev     libubsan1
+  cpp-15-x86-64-linux-gnu  g++-15                   gcc-15-base              libalgorithm-merge-perl    libfakeroot             libisl23    libpython3.14-dev  lto-disabled-list
+  cpp-x86-64-linux-gnu     g++-15-x86-64-linux-gnu  gcc-15-x86-64-linux-gnu  libasan8                   libfile-fcntllock-perl  libitm1     libquadmath0       make
+  dpkg-dev                 g++-x86-64-linux-gnu     gcc-x86-64-linux-gnu     libcc1-0                   libgcc-15-dev           liblsan0    libstdc++-15-dev   python3.14-dev
+
+Suggested packages:
+  cpp-doc         cpp-15-doc      debian-tag2upload-keyring  g++-15-multilib  gcc-multilib  automake  flex   gdb      gcc-15-multilib       bzr               make-doc
+  gcc-15-locales  debian-keyring  g++-multilib               gcc-15-doc       autoconf      libtool   bison  gcc-doc  gdb-x86-64-linux-gnu  libstdc++-15-doc
+
+Summary:
+  Upgrading: 0, Installing: 43, Removing: 0, Not Upgrading: 0
+  Download size: 80.1 MB
+  Space needed: 278 MB / 91.7 GB available
+
+Get:1 http://archive.ubuntu.com/ubuntu resolute/main amd64 gcc-15-base amd64 15.2.0-16ubuntu1 [39.0 kB]
+Get:2 http://archive.ubuntu.com/ubuntu resolute/main amd64 libisl23 amd64 0.27-1build1 [691 kB]
+Get:3 http://archive.ubuntu.com/ubuntu resolute/main amd64 libmpc3 amd64 1.3.1-3 [54.6 kB]
+Get:4 http://archive.ubuntu.com/ubuntu resolute/main amd64 cpp-15-x86-64-linux-gnu amd64 15.2.0-16ubuntu1 [12.9 MB]
+Get:5 http://archive.ubuntu.com/ubuntu resolute/main amd64 cpp-15 amd64 15.2.0-16ubuntu1 [1,030 B]
+Get:6 http://archive.ubuntu.com/ubuntu resolute/main amd64 cpp-x86-64-linux-gnu amd64 4:15.2.0-5ubuntu1 [5,840 B]
+Get:7 http://archive.ubuntu.com/ubuntu resolute/main amd64 cpp amd64 4:15.2.0-5ubuntu1 [22.4 kB]
+Get:8 http://archive.ubuntu.com/ubuntu resolute/main amd64 libcc1-0 amd64 16-20260322-1ubuntu1 [51.2 kB]
+Get:9 http://archive.ubuntu.com/ubuntu resolute/main amd64 libgomp1 amd64 16-20260322-1ubuntu1 [162 kB]
+Get:10 http://archive.ubuntu.com/ubuntu resolute/main amd64 libitm1 amd64 16-20260322-1ubuntu1 [30.0 kB]
+Get:11 http://archive.ubuntu.com/ubuntu resolute/main amd64 libasan8 amd64 16-20260322-1ubuntu1 [3,184 kB]
+Get:12 http://archive.ubuntu.com/ubuntu resolute/main amd64 liblsan0 amd64 16-20260322-1ubuntu1 [1,394 kB]
+Get:13 http://archive.ubuntu.com/ubuntu resolute/main amd64 libtsan2 amd64 16-20260322-1ubuntu1 [2,849 kB]
+Get:14 http://archive.ubuntu.com/ubuntu resolute/main amd64 libubsan1 amd64 16-20260322-1ubuntu1 [1,240 kB]
+Get:15 http://archive.ubuntu.com/ubuntu resolute/main amd64 libhwasan0 amd64 16-20260322-1ubuntu1 [1,731 kB]
+Get:16 http://archive.ubuntu.com/ubuntu resolute/main amd64 libquadmath0 amd64 16-20260322-1ubuntu1 [155 kB]
+Get:17 http://archive.ubuntu.com/ubuntu resolute/main amd64 libgcc-15-dev amd64 15.2.0-16ubuntu1 [2,866 kB]
+Get:18 http://archive.ubuntu.com/ubuntu resolute/main amd64 gcc-15-x86-64-linux-gnu amd64 15.2.0-16ubuntu1 [25.4 MB]
+Get:19 http://archive.ubuntu.com/ubuntu resolute/main amd64 gcc-15 amd64 15.2.0-16ubuntu1 [539 kB]
+Get:20 http://archive.ubuntu.com/ubuntu resolute/main amd64 gcc-x86-64-linux-gnu amd64 4:15.2.0-5ubuntu1 [1,208 B]
+Get:21 http://archive.ubuntu.com/ubuntu resolute/main amd64 gcc amd64 4:15.2.0-5ubuntu1 [5,010 B]
+Get:22 http://archive.ubuntu.com/ubuntu resolute/main amd64 libstdc++-15-dev amd64 15.2.0-16ubuntu1 [2,920 kB]
+Get:23 http://archive.ubuntu.com/ubuntu resolute/main amd64 g++-15-x86-64-linux-gnu amd64 15.2.0-16ubuntu1 [14.4 MB]
+Get:24 http://archive.ubuntu.com/ubuntu resolute/main amd64 g++-15 amd64 15.2.0-16ubuntu1 [26.7 kB]
+Get:25 http://archive.ubuntu.com/ubuntu resolute/main amd64 g++-x86-64-linux-gnu amd64 4:15.2.0-5ubuntu1 [968 B]
+Get:26 http://archive.ubuntu.com/ubuntu resolute/main amd64 g++ amd64 4:15.2.0-5ubuntu1 [1,100 B]
+Get:27 http://archive.ubuntu.com/ubuntu resolute/main amd64 make amd64 4.4.1-3 [197 kB]
+Get:28 http://archive.ubuntu.com/ubuntu resolute/main amd64 libdpkg-perl all 1.23.7ubuntu1 [289 kB]
+Get:29 http://archive.ubuntu.com/ubuntu resolute/main amd64 lto-disabled-list all 79 [14.2 kB]
+Get:30 http://archive.ubuntu.com/ubuntu resolute/main amd64 dpkg-dev all 1.23.7ubuntu1 [1,062 kB]
+Get:31 http://archive.ubuntu.com/ubuntu resolute/main amd64 build-essential amd64 12.12ubuntu2 [5,256 B]
+Get:32 http://archive.ubuntu.com/ubuntu resolute/main amd64 libfakeroot amd64 1.37.2-1 [34.0 kB]
+Get:33 http://archive.ubuntu.com/ubuntu resolute/main amd64 fakeroot amd64 1.37.2-1 [68.3 kB]
+Get:34 http://archive.ubuntu.com/ubuntu resolute/main amd64 libalgorithm-diff-perl all 1.201-1 [41.8 kB]
+Get:35 http://archive.ubuntu.com/ubuntu resolute/main amd64 libalgorithm-diff-xs-perl amd64 0.04-9 [11.5 kB]
+Get:36 http://archive.ubuntu.com/ubuntu resolute/main amd64 libalgorithm-merge-perl all 0.08-5 [11.4 kB]
+Get:37 http://archive.ubuntu.com/ubuntu resolute/main amd64 libexpat1-dev amd64 2.7.4-1 [145 kB]
+Get:38 http://archive.ubuntu.com/ubuntu resolute/main amd64 libfile-fcntllock-perl amd64 0.22-4ubuntu6 [32.8 kB]
+Get:39 http://archive.ubuntu.com/ubuntu resolute/main amd64 zlib1g-dev amd64 1:1.3.dfsg+really1.3.1-1ubuntu3 [895 kB]
+Get:40 http://archive.ubuntu.com/ubuntu resolute/main amd64 libpython3.14-dev amd64 3.14.4-1 [5,986 kB]
+Get:41 http://archive.ubuntu.com/ubuntu resolute/main amd64 libpython3-dev amd64 3.14.3-0ubuntu2 [8,736 B]
+Get:42 http://archive.ubuntu.com/ubuntu resolute/main amd64 python3.14-dev amd64 3.14.4-1 [510 kB]
+Get:43 http://archive.ubuntu.com/ubuntu resolute/main amd64 python3-dev amd64 3.14.3-0ubuntu2 [26.6 kB]
+Fetched 80.1 MB in 9s (8,941 kB/s)
+Extracting templates from packages: 100%
+Selecting previously unselected package gcc-15-base:amd64.
+(Reading database… 140097 files and directories currently installed.)
+Preparing to unpack …/00-gcc-15-base_15.2.0-16ubuntu1_amd64.deb…
+Unpacking gcc-15-base:amd64 (15.2.0-16ubuntu1)…
+Selecting previously unselected package libisl23:amd64.
+Preparing to unpack …/01-libisl23_0.27-1build1_amd64.deb…
+Unpacking libisl23:amd64 (0.27-1build1)…
+Selecting previously unselected package libmpc3:amd64.
+Preparing to unpack …/02-libmpc3_1.3.1-3_amd64.deb…
+Unpacking libmpc3:amd64 (1.3.1-3)…
+Selecting previously unselected package cpp-15-x86-64-linux-gnu.
+Preparing to unpack …/03-cpp-15-x86-64-linux-gnu_15.2.0-16ubuntu1_amd64.deb…
+Unpacking cpp-15-x86-64-linux-gnu (15.2.0-16ubuntu1)…
+Selecting previously unselected package cpp-15.
+Preparing to unpack …/04-cpp-15_15.2.0-16ubuntu1_amd64.deb…
+Unpacking cpp-15 (15.2.0-16ubuntu1)…
+Selecting previously unselected package cpp-x86-64-linux-gnu.
+Preparing to unpack …/05-cpp-x86-64-linux-gnu_4%3a15.2.0-5ubuntu1_amd64.deb…
+Unpacking cpp-x86-64-linux-gnu (4:15.2.0-5ubuntu1)…
+Selecting previously unselected package cpp.
+Preparing to unpack …/06-cpp_4%3a15.2.0-5ubuntu1_amd64.deb…
+Unpacking cpp (4:15.2.0-5ubuntu1)…
+Selecting previously unselected package libcc1-0:amd64.
+Preparing to unpack …/07-libcc1-0_16-20260322-1ubuntu1_amd64.deb…
+Unpacking libcc1-0:amd64 (16-20260322-1ubuntu1)…
+Selecting previously unselected package libgomp1:amd64.
+Preparing to unpack …/08-libgomp1_16-20260322-1ubuntu1_amd64.deb…
+Unpacking libgomp1:amd64 (16-20260322-1ubuntu1)…
+Selecting previously unselected package libitm1:amd64.
+Preparing to unpack …/09-libitm1_16-20260322-1ubuntu1_amd64.deb…
+Unpacking libitm1:amd64 (16-20260322-1ubuntu1)…
+Selecting previously unselected package libasan8:amd64.
+Preparing to unpack …/10-libasan8_16-20260322-1ubuntu1_amd64.deb…
+Unpacking libasan8:amd64 (16-20260322-1ubuntu1)…
+Selecting previously unselected package liblsan0:amd64.
+Preparing to unpack …/11-liblsan0_16-20260322-1ubuntu1_amd64.deb…
+Unpacking liblsan0:amd64 (16-20260322-1ubuntu1)…
+Selecting previously unselected package libtsan2:amd64.
+Preparing to unpack …/12-libtsan2_16-20260322-1ubuntu1_amd64.deb…
+Unpacking libtsan2:amd64 (16-20260322-1ubuntu1)…
+Selecting previously unselected package libubsan1:amd64.
+Preparing to unpack …/13-libubsan1_16-20260322-1ubuntu1_amd64.deb…
+Unpacking libubsan1:amd64 (16-20260322-1ubuntu1)…
+Selecting previously unselected package libhwasan0:amd64.
+Preparing to unpack …/14-libhwasan0_16-20260322-1ubuntu1_amd64.deb…
+Unpacking libhwasan0:amd64 (16-20260322-1ubuntu1)…
+Selecting previously unselected package libquadmath0:amd64.
+Preparing to unpack …/15-libquadmath0_16-20260322-1ubuntu1_amd64.deb…
+Unpacking libquadmath0:amd64 (16-20260322-1ubuntu1)…
+Selecting previously unselected package libgcc-15-dev:amd64.
+Preparing to unpack …/16-libgcc-15-dev_15.2.0-16ubuntu1_amd64.deb…
+Unpacking libgcc-15-dev:amd64 (15.2.0-16ubuntu1)…
+Selecting previously unselected package gcc-15-x86-64-linux-gnu.
+Preparing to unpack …/17-gcc-15-x86-64-linux-gnu_15.2.0-16ubuntu1_amd64.deb…
+Unpacking gcc-15-x86-64-linux-gnu (15.2.0-16ubuntu1)…
+Selecting previously unselected package gcc-15.
+Preparing to unpack …/18-gcc-15_15.2.0-16ubuntu1_amd64.deb…
+Unpacking gcc-15 (15.2.0-16ubuntu1)…
+Selecting previously unselected package gcc-x86-64-linux-gnu.
+Preparing to unpack …/19-gcc-x86-64-linux-gnu_4%3a15.2.0-5ubuntu1_amd64.deb…
+Unpacking gcc-x86-64-linux-gnu (4:15.2.0-5ubuntu1)…
+Selecting previously unselected package gcc.
+Preparing to unpack …/20-gcc_4%3a15.2.0-5ubuntu1_amd64.deb…
+Unpacking gcc (4:15.2.0-5ubuntu1)…
+Selecting previously unselected package libstdc++-15-dev:amd64.
+Preparing to unpack …/21-libstdc++-15-dev_15.2.0-16ubuntu1_amd64.deb…
+Unpacking libstdc++-15-dev:amd64 (15.2.0-16ubuntu1)…
+Selecting previously unselected package g++-15-x86-64-linux-gnu.
+Preparing to unpack …/22-g++-15-x86-64-linux-gnu_15.2.0-16ubuntu1_amd64.deb…
+Unpacking g++-15-x86-64-linux-gnu (15.2.0-16ubuntu1)…
+Selecting previously unselected package g++-15.
+Preparing to unpack …/23-g++-15_15.2.0-16ubuntu1_amd64.deb…
+Unpacking g++-15 (15.2.0-16ubuntu1)…
+Selecting previously unselected package g++-x86-64-linux-gnu.
+Preparing to unpack …/24-g++-x86-64-linux-gnu_4%3a15.2.0-5ubuntu1_amd64.deb…
+Unpacking g++-x86-64-linux-gnu (4:15.2.0-5ubuntu1)…
+Selecting previously unselected package g++.
+Preparing to unpack …/25-g++_4%3a15.2.0-5ubuntu1_amd64.deb…
+Unpacking g++ (4:15.2.0-5ubuntu1)…
+Selecting previously unselected package make.
+Preparing to unpack …/26-make_4.4.1-3_amd64.deb…
+Unpacking make (4.4.1-3)…
+Selecting previously unselected package libdpkg-perl.
+Preparing to unpack …/27-libdpkg-perl_1.23.7ubuntu1_all.deb…
+Unpacking libdpkg-perl (1.23.7ubuntu1)…
+Selecting previously unselected package lto-disabled-list.
+Preparing to unpack …/28-lto-disabled-list_79_all.deb…
+Unpacking lto-disabled-list (79)…
+Selecting previously unselected package dpkg-dev.
+Preparing to unpack …/29-dpkg-dev_1.23.7ubuntu1_all.deb…
+Unpacking dpkg-dev (1.23.7ubuntu1)…
+Selecting previously unselected package build-essential.
+Preparing to unpack …/30-build-essential_12.12ubuntu2_amd64.deb…
+Unpacking build-essential (12.12ubuntu2)…
+Selecting previously unselected package libfakeroot:amd64.
+Preparing to unpack …/31-libfakeroot_1.37.2-1_amd64.deb…
+Unpacking libfakeroot:amd64 (1.37.2-1)…
+Selecting previously unselected package fakeroot.
+Preparing to unpack …/32-fakeroot_1.37.2-1_amd64.deb…
+Unpacking fakeroot (1.37.2-1)…
+Selecting previously unselected package libalgorithm-diff-perl.
+Preparing to unpack …/33-libalgorithm-diff-perl_1.201-1_all.deb…
+Unpacking libalgorithm-diff-perl (1.201-1)…
+Selecting previously unselected package libalgorithm-diff-xs-perl.
+Preparing to unpack …/34-libalgorithm-diff-xs-perl_0.04-9_amd64.deb…
+Unpacking libalgorithm-diff-xs-perl (0.04-9)…
+Selecting previously unselected package libalgorithm-merge-perl.
+Preparing to unpack …/35-libalgorithm-merge-perl_0.08-5_all.deb…
+Unpacking libalgorithm-merge-perl (0.08-5)…
+Selecting previously unselected package libexpat1-dev:amd64.
+Preparing to unpack …/36-libexpat1-dev_2.7.4-1_amd64.deb…
+Unpacking libexpat1-dev:amd64 (2.7.4-1)…
+Selecting previously unselected package libfile-fcntllock-perl.
+Preparing to unpack …/37-libfile-fcntllock-perl_0.22-4ubuntu6_amd64.deb…
+Unpacking libfile-fcntllock-perl (0.22-4ubuntu6)…
+Selecting previously unselected package zlib1g-dev:amd64.
+Preparing to unpack …/38-zlib1g-dev_1%3a1.3.dfsg+really1.3.1-1ubuntu3_amd64.deb…
+Unpacking zlib1g-dev:amd64 (1:1.3.dfsg+really1.3.1-1ubuntu3)…
+Selecting previously unselected package libpython3.14-dev:amd64.
+Preparing to unpack …/39-libpython3.14-dev_3.14.4-1_amd64.deb…
+Unpacking libpython3.14-dev:amd64 (3.14.4-1)…
+Selecting previously unselected package libpython3-dev:amd64.
+Preparing to unpack …/40-libpython3-dev_3.14.3-0ubuntu2_amd64.deb…
+Unpacking libpython3-dev:amd64 (3.14.3-0ubuntu2)…
+Selecting previously unselected package python3.14-dev.
+Preparing to unpack …/41-python3.14-dev_3.14.4-1_amd64.deb…
+Unpacking python3.14-dev (3.14.4-1)…
+Selecting previously unselected package python3-dev.
+Preparing to unpack …/42-python3-dev_3.14.3-0ubuntu2_amd64.deb…
+Unpacking python3-dev (3.14.3-0ubuntu2)…
+Setting up lto-disabled-list (79)…
+Setting up libfile-fcntllock-perl (0.22-4ubuntu6)…
+Setting up libalgorithm-diff-perl (1.201-1)…
+Setting up libgomp1:amd64 (16-20260322-1ubuntu1)…
+Setting up libfakeroot:amd64 (1.37.2-1)…
+Setting up fakeroot (1.37.2-1)…
+update-alternatives: using /usr/bin/fakeroot-sysv to provide /usr/bin/fakeroot (fakeroot) in auto mode
+Setting up libexpat1-dev:amd64 (2.7.4-1)…
+Setting up make (4.4.1-3)…
+Setting up libquadmath0:amd64 (16-20260322-1ubuntu1)…
+Setting up libmpc3:amd64 (1.3.1-3)…
+Setting up libdpkg-perl (1.23.7ubuntu1)…
+Setting up libubsan1:amd64 (16-20260322-1ubuntu1)…
+Setting up zlib1g-dev:amd64 (1:1.3.dfsg+really1.3.1-1ubuntu3)…
+Setting up libhwasan0:amd64 (16-20260322-1ubuntu1)…
+Setting up libasan8:amd64 (16-20260322-1ubuntu1)…
+Setting up libpython3.14-dev:amd64 (3.14.4-1)…
+Setting up libtsan2:amd64 (16-20260322-1ubuntu1)…
+Setting up libisl23:amd64 (0.27-1build1)…
+Setting up gcc-15-base:amd64 (15.2.0-16ubuntu1)…
+Setting up libalgorithm-diff-xs-perl (0.04-9)…
+Setting up libcc1-0:amd64 (16-20260322-1ubuntu1)…
+Setting up liblsan0:amd64 (16-20260322-1ubuntu1)…
+Setting up libitm1:amd64 (16-20260322-1ubuntu1)…
+Setting up libalgorithm-merge-perl (0.08-5)…
+Setting up libgcc-15-dev:amd64 (15.2.0-16ubuntu1)…
+Setting up libpython3-dev:amd64 (3.14.3-0ubuntu2)…
+Setting up python3.14-dev (3.14.4-1)…
+Setting up cpp-15-x86-64-linux-gnu (15.2.0-16ubuntu1)…
+Setting up dpkg-dev (1.23.7ubuntu1)…
+Setting up gcc-15-x86-64-linux-gnu (15.2.0-16ubuntu1)…
+Setting up libstdc++-15-dev:amd64 (15.2.0-16ubuntu1)…
+Setting up python3-dev (3.14.3-0ubuntu2)…
+Setting up cpp-15 (15.2.0-16ubuntu1)…
+Setting up cpp-x86-64-linux-gnu (4:15.2.0-5ubuntu1)…
+Setting up g++-15-x86-64-linux-gnu (15.2.0-16ubuntu1)…
+Setting up gcc-x86-64-linux-gnu (4:15.2.0-5ubuntu1)…
+Setting up gcc-15 (15.2.0-16ubuntu1)…
+Setting up cpp (4:15.2.0-5ubuntu1)…
+Setting up g++-x86-64-linux-gnu (4:15.2.0-5ubuntu1)…
+Setting up g++-15 (15.2.0-16ubuntu1)…
+Setting up gcc (4:15.2.0-5ubuntu1)…
+Setting up g++ (4:15.2.0-5ubuntu1)…
+update-alternatives: using /usr/bin/g++ to provide /usr/bin/c++ (c++) in auto mode
+Setting up build-essential (12.12ubuntu2)…
+Processing triggers for man-db (2.13.1-1build1)…
+Processing triggers for libc-bin (2.43-2ubuntu2)…
+Scanning processes...
+Scanning processor microcode...
+Scanning linux images...
+
+Running kernel seems to be up-to-date.
+
+The processor microcode seems to be up-to-date.
+
+No services need to be restarted.
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+(crawler) robot@robot:~/git/crawler$ uv pip install osgar==1.0.0
+Resolved 2 packages in 3ms
+Installed 2 packages in 11ms
+ + msgpack==1.1.2
+ + osgar==1.0.0
+(crawler) robot@robot:~/git/crawler$ uv pip install pymavlink
+Resolved 3 packages in 10ms
+      Built pymavlink==2.4.49
+Prepared 1 package in 8.92s
+Installed 3 packages in 6ms
+ + fastcrc==0.3.6
+ + lxml==6.1.0
+ + pymavlink==2.4.49
+(crawler) robot@robot:~/git/crawler$ lsusb
+Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+Bus 001 Device 002: ID 046d:c542 Logitech, Inc. M185 compact wireless mouse
+Bus 001 Device 003: ID c0f4:05c0 SZH usb keyboard
+Bus 001 Device 005: ID 2dae:1058 CubePilot CubeOrange+
+Bus 001 Device 006: ID 3537:2106 Zikway HID zk
+Bus 002 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
+(crawler) robot@robot:~/git/crawler$ ls /dev/ttyACM*
+/dev/ttyACM0  /dev/ttyACM1
+(crawler) robot@robot:~/git/crawler$ ls -l /dev/serial/by-id/
+total 0
+lrwxrwxrwx 1 root root 13 May 11 21:23 usb-CubePilot_CubeOrange+_32002C001951333230363332-if00 -> ../../ttyACM0
+lrwxrwxrwx 1 root root 13 May 11 21:23 usb-CubePilot_CubeOrange+_32002C001951333230363332-if02 -> ../../ttyACM1
+(crawler) robot@robot:~/git/crawler$ uv pip install evdev
+Resolved 1 package in 339ms
+      Built evdev==1.9.3
+Prepared 1 package in 1.59s
+Installed 1 package in 1ms
+ + evdev==1.9.3
+(crawler) robot@robot:~/git/crawler$ uv pip install pyserial
+Resolved 1 package in 323ms
+Prepared 1 package in 35ms
+Installed 1 package in 5ms
+ + pyserial==3.5
+(crawler) robot@robot:~/git/crawler$ git config --global user.name "Odroid Crawler"
+git config --global user.email "crawler@tf.czu.cz"
+(crawler) robot@robot:~/git/crawler$

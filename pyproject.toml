@@ -1,0 +1,13 @@
+[project]
+name = "crawler"
+version = "0.1.0"
+description = "Bilingual (EN/CS) autonomous control framework for the Hector/Hecthor III mobile robot platform (CZU/Pro Lab)"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "osgar",
+    "pymavlink>=2.4.49",
+]
+
+[tool.uv.sources]
+osgar = { git = "https://github.com/robotika/osgar.git" }
