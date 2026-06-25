@@ -24,7 +24,7 @@ try:
             if typ == 'RC_CHANNELS':
                 posledni_rc = msg.chan1_raw
                 #print(msg)
-                print(f"Ch1: {msg.chan1_raw}, Ch2: {msg.chan2_raw}, Ch3: {msg.chan3_raw}, Ch4: {msg.chan4_raw} , Ch5: {msg.chan5_raw}, Ch6: {msg.chan6_raw}, Ch7: {msg.chan7_raw}, Ch8: {msg.chan8_raw}, Ch9: {msg.chan9_raw}, Ch10: {msg.chan10_raw} No:{msg_count}")
+                #print(f"Ch1: {msg.chan1_raw}, Ch2: {msg.chan2_raw}, Ch3: {msg.chan3_raw}, Ch4: {msg.chan4_raw} , Ch5: {msg.chan5_raw}, Ch6: {msg.chan6_raw}, Ch7: {msg.chan7_raw}, Ch8: {msg.chan8_raw}, Ch9: {msg.chan9_raw}, Ch10: {msg.chan10_raw} No:{msg_count}")
                 # Můžeme hned reagovat na změnu páčky
             elif typ == 'SERVO_OUTPUT_RAW':
                 #print(msg)
@@ -33,10 +33,12 @@ try:
                 
             elif typ == 'ESC_TELEMETRY_1_TO_4':
                 posledni_esc = msg.rpm[0]
-                print(msg.rpm)
+                #print(msg.rpm)
                 # Uložíme si otáčky
             elif typ == 'BAD_DATA':
                 bad_data_count += 1 
+            elif typ == 'RPM':
+                print(msg)
             elif typ == 'AHRS2':
                 pass #???
             elif typ == 'VFR_HUD':
@@ -90,8 +92,11 @@ try:
             elif typ == 'PARAM_VALUE':
                 pass #???
             elif typ == 'STATUSTEXT':
+                print(msg)
                 pass #???
             elif typ == 'ADSB_VEHICLE':
+                pass #???
+            elif typ == 'NAMED_VALUE_FLOAT':
                 pass #???
             else:
                 print(typ)

@@ -27,8 +27,8 @@ function update_odometry()
     last_update = now
 
     -- Načtení aktuálních RPM a PWM
-    local rpm_L = get_num(RPM:get_rpm(1))
-    local rpm_R = get_num(RPM:get_rpm(0))
+    local rpm_L = get_num(RPM:get_rpm(0))
+    local rpm_R = get_num(RPM:get_rpm(1))
     local pwm_L = get_num(SRV_Channels:get_output_pwm(73))
     local pwm_R = get_num(SRV_Channels:get_output_pwm(74))
 
